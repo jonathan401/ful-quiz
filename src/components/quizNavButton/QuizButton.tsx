@@ -5,13 +5,21 @@ import "./QuizButton.style.scss";
 
 interface QuizButtonProps extends ComponentProps<"button"> {
   text: string | number;
-  active?: string;
+  active?: boolean;
   selected?: boolean;
 }
 
-const QuizButton: React.FC<QuizButtonProps> = ({ selected, text, ...rest }) => {
+const QuizButton: React.FC<QuizButtonProps> = ({
+  active,
+  selected,
+  text,
+  ...rest
+}) => {
   return (
-    <button {...rest} className="quiz-btn">
+    <button
+      {...rest}
+      className={`${active ? "quiz-btn quiz-btn--active" : "quiz-btn"}`}
+    >
       {text}
     </button>
   );

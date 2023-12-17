@@ -14,12 +14,9 @@
     background-color: var(--neutral);
   }
 
-  &:focus {
+  &:focus,
+  &--active {
     outline: 2px solid var(--border-color);
     outline-offset: 2px;
-  }
-
-  &--selected {
-    background-color: blue;
   }
 }
