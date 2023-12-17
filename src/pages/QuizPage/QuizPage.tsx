@@ -35,6 +35,8 @@ const Quiz = () => {
     setShowResult(false);
   };
 
+  console.log(currentQuestion);
+
   return (
     <section className="quiz-container">
       <h1 className="quiz-header">The FUL Quiz</h1>
@@ -70,7 +72,7 @@ const Quiz = () => {
                   key={crypto.randomUUID()}
                   text={num + 1}
                   onClick={() => setCurrentQuestion(num)}
-                  selected={currentQuestion === num}
+                  active={currentQuestion === num}
                 />
               ))}
             </div>
