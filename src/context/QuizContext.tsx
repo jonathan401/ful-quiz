@@ -8,7 +8,7 @@ import React, {
 import { QuizAnswerType, QuizQuestionType } from "../types/quiz";
 
 // data
-import { quiz } from "../data";
+import { quiz, GST102 } from "../data";
 import { shuffleArray } from "../utils";
 
 type QuizContextType = {
@@ -31,7 +31,7 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
     []
   );
   const [questions, setQuestions] = useState<QuizQuestionType[]>(
-    quiz.questions
+    GST102.questions
   );
 
   const addAnsweredQuestion = (questionId: number, answer: QuizAnswerType) => {
