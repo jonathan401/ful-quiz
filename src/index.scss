@@ -208,7 +208,7 @@ main {
   margin: 0.75rem 0;
   padding: 0.8rem 0;
   border-top: 1px solid var(--grayish-blue);
-  // background-color: red;
+  flex-wrap: wrap;
 }
 
 .quiz-progress-btn-group {
