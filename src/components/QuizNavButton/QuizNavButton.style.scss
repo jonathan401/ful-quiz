@@ -1,0 +1,29 @@
+.quiz-btn {
+  padding: 0.3em 0.75em;
+  min-height: 2rem;
+  min-width: 2rem;
+  width: fit-content;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  font-size: 1em;
+  font-weight: 500;
+  border-radius: var(--rounded-sm);
+  transition: background-color 150ms ease, outline 150ms ease;
+
+  // &:hover:not(:active) {
+  //   background-color: var(--neutral);
+  // }
+
+  &:focus,
+  &--active {
+    outline: 2px solid var(--border-color);
+    outline-offset: 2px;
+  }
+
+  &--answered {
+    background-color: var(--soft-blue);
+    outline-color: var(--soft-blue);
+    color: var(--white);
+    border-color: transparent;
+  }
+}
