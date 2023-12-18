@@ -136,6 +136,7 @@ header {
     max-width: none;
     width: fit-content;
     padding: 0;
+    overflow: visible;
 
     &__list {
       flex-direction: row;

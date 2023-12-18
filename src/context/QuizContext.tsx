@@ -1,7 +1,10 @@
 import React, {
   createContext,
+  Dispatch,
   ReactNode,
+  SetStateAction,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -10,13 +13,15 @@ import { QuizAnswerType, QuizQuestionType } from "../types/quiz";
 // data
 import { quiz, GST102 } from "../data";
 import { shuffleArray } from "../utils";
+import { useParams } from "react-router-dom";
 
 type QuizContextType = {
   answeredQuestions: QuizAnswerType[];
   addAnsweredQuestion: (questionId: number, answer: QuizAnswerType) => void;
-  quizQuestions: QuizQuestionType[];
+  quizQuestions: QuizQuestionType[] | [];
   reshuffleQuestions: () => void;
-  // currentQuestion:
+  setQuestions: Dispatch<SetStateAction<QuizQuestionType[]>>;
+  clearChoice: (questionId: number) => void;
 };
 
 const QuizContext = createContext<QuizContextType>({
@@ -24,15 +29,30 @@ const QuizContext = createContext<QuizContextType>({
   addAnsweredQuestion: () => {},
   quizQuestions: [],
   reshuffleQuestions: () => {},
+  setQuestions: () => {},
+  clearChoice: () => {},
 });
 
 const QuizProvider = ({ children }: { children: ReactNode }) => {
   const [answeredQuestions, setAnsweredQuestions] = useState<QuizAnswerType[]>(
     []
   );
-  const [questions, setQuestions] = useState<QuizQuestionType[]>(
-    GST102.questions
-  );
+  const [questions, setQuestions] = useState<QuizQuestionType[] | []>([]);
+
+  // console.log(CoursesList[0]);
+
+  const clearChoice = (questionId: number) => {
+    setAnsweredQuestions((prevAnswers) => {
+      const rest = [
+        ...prevAnswers.filter((answer) => answer.questionNumber !== questionId),
+      ];
+      const choice = prevAnswers.filter(
+        (answer) => answer.questionNumber === questionId
+      )[0];
+      choice.answer = "";
+      return [...rest, choice];
+    });
+  };
 
   const addAnsweredQuestion = (questionId: number, answer: QuizAnswerType) => {
     setAnsweredQuestions((prevAnswers) => {
@@ -43,25 +63,32 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
         // return [..previousAnswers, answer];
         // if the index does not exists
         // REVIEW: THIS IS REALLY HACKY
-        let con = [...prevAnswers];
+        /* 
+          when the user answers a question, save that question and if it is edited, find that question and update
+          its value. If the question is being answered for the first time, add that answer to the question
+        */
+        let newAnswers = [...prevAnswers];
         for (let i = 0; i <= questionId; i++) {
-          if (!con[i]) {
-            con[i] =
+          if (!newAnswers[i]) {
+            newAnswers[i] =
               i === questionId
                 ? answer
-                : { question: null, answer: null, correct: null };
+                : {
+                    question: null,
+                    answer: null,
+                    correct: null,
+                    questionNumber: i,
+                  };
           }
         }
 
-        return con;
+        return newAnswers;
       }
     });
   };
 
-  // console.log(answeredQuestions);
-
   const reshuffleQuestions = () => {
-    // be able to shuffle the options too
+    // TODO be able to shuffle the options too
     setQuestions(shuffleArray(questions));
     setAnsweredQuestions([]);
   };
@@ -72,6 +99,8 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
       addAnsweredQuestion,
       quizQuestions: questions,
       reshuffleQuestions,
+      setQuestions,
+      clearChoice,
     };
   }, [questions, answeredQuestions]);
 
@@ -91,27 +120,3 @@ export const useQuizContext = () => {
 };
 
 export default QuizProvider;
-
-/* 
-  actions:
-    when the questions are rendered and an options is selected, get the question that is currently rendered and
-    update its answer value to the value of the option
-    issue is the options should have the state been directly decided by question
-    
-    <input 
-      type="radio" 
-      name="radio-name" 
-      value={option} 
-      checked={selectedAnswser === option}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-        answerQuestion(question, e.target.value);
-      }}
-    />
-
-    answerQuestion = (question, value) => {
-      setAnsweredQuestions((prevQuestions) => 
-        {...prevQuestions, {question, correct: question.correct === value}
-        })
-    }
-
-*/

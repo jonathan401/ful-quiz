@@ -3,9 +3,9 @@ export interface QuizQuestionType {
   choices: string[];
   correctAnswer: string;
 }
-[];
 
 export interface QuizAnswerType {
+  questionNumber: number | null;
   question: string | null;
   correct: boolean | null;
   answer: string | null;

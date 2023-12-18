@@ -6,7 +6,7 @@ export const shuffleArray = (array: QuizQuestionType[]) => {
     .sort((a, b) => a.sort - b.sort)
     .map((a) => a.value);
 
-  console.log(shuffledArray.map((question) => question.choices));
+  // console.log(shuffledArray.map((question) => question.choices));
   return shuffledArray;
 };
 

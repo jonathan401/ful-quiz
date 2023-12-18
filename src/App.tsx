@@ -6,7 +6,7 @@ import { quiz } from "./data";
 import { routes } from "./pages/routes";
 
 // component imports
-import { Navbar } from "./components/navbar";
+import { Navbar } from "./components/Navbar";
 import QuizProvider from "./context/QuizContext";
 
 const API = "https://opentdb.com/api.php?amount=10";
@@ -26,6 +26,8 @@ function App() {
                   element={<route.component />}
                 />
               ))}
+              <Route path="/courses/:id" />
+              <Route path="*" element={<p>Not found</p>} />
             </Routes>
           </div>
         </QuizProvider>

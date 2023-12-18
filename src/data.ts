@@ -5,6 +5,22 @@ interface QuizListType {
   questions: QuizQuestionType[];
 }
 
+export interface testType {
+  [key: string]: {
+    title: string;
+    code: string;
+    key: string;
+    questions: QuizQuestionType[];
+  };
+}
+
+export interface CoursesType {
+  title: string;
+  code: string;
+  key: string;
+  questions: QuizQuestionType[];
+}
+
 export const quiz: QuizListType = {
   topic: "Javascript",
   questions: [
@@ -154,3 +170,57 @@ export const GST102: QuizListType = {
     },
   ],
 };
+
+export const t: testType = {
+  gst101: {
+    title: "English Language",
+    code: "GST 101",
+    key: "gst101",
+    questions: GST102.questions,
+  },
+  pos101: {
+    title: "English Language",
+    code: "GST 101",
+    key: "gst101",
+    questions: quiz.questions,
+  },
+  gst110: {
+    title: "Philosophy and History of Science",
+    code: "GST 110",
+    key: "gst110",
+    questions: [],
+  },
+  gst106: {
+    title: "Nigerian people and Culture",
+    code: "GST 106",
+    key: "gst106",
+    questions: [],
+  },
+};
+
+export const CoursesList: CoursesType[] = [
+  {
+    title: "English Language",
+    code: "GST 101",
+    key: "gst101",
+    questions: GST102.questions,
+  },
+  {
+    title: "Introduction to Political Science",
+    code: "POS 101",
+    key: "pos101",
+    questions: GST102.questions,
+  },
+  {
+    title: "Philosophy",
+    code: "GST 110",
+    key: "gst110",
+    questions: GST102.questions,
+  },
+  {
+    title: "Nigerian people and Culture",
+    code: "GST 106",
+    key: "gst106",
+    questions: GST102.questions,
+  },
+];

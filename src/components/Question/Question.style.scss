@@ -31,12 +31,12 @@
     width: 0;
     height: 0;
     opacity: 0;
+    appearance: none;
     transition: all 200ms ease;
 
     &:focus + label {
       outline: 2px solid var(--border-color);
       outline-offset: 3px;
-      /* background-color: var(--neutral); */
     }
 
     &:checked + label {
@@ -64,5 +64,40 @@
     &:hover {
       background-color: var(--neutral);
     }
+  }
+
+  &__btn--clear-choice {
+    width: fit-content;
+    padding: 0 !important;
+    margin: 0.3rem 0;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: calc(100% + 0.1rem);
+      width: 100%;
+      height: 2px;
+      background-color: var(--soft-blue);
+      opacity: 0;
+      transition: opacity 100ms linear;
+    }
+
+    &:focus {
+      outline: none !important;
+      // border-bottom: 1px solid red;
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    // &:focus &::after {
+    //   position: absolute;
+    //   top: calc(100% + 0.3rem);
+    //   width: 100%;
+    //   height: 2px;
+    //   background-color: red;
+    // }
   }
 }

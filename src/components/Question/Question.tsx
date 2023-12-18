@@ -21,13 +21,15 @@ const Question = ({
   options,
   questions,
 }: QuestionProps) => {
-  const { addAnsweredQuestion, answeredQuestions } = useQuizContext();
+  const { addAnsweredQuestion, answeredQuestions, clearChoice } =
+    useQuizContext();
 
   const handleAnswerQuestion = (e: React.ChangeEvent<HTMLInputElement>) => {
     addAnsweredQuestion(questionNumber, {
       answer: e.target.value,
       question,
       correct: e.target.value === questions[questionNumber].correctAnswer,
+      questionNumber,
     });
   };
   return (
@@ -77,6 +79,15 @@ const Question = ({
               </div>
             );
           })}
+          {answeredQuestions[questionNumber]?.answer && (
+            <button
+              type="button"
+              className="btn btn--ghost question__btn--clear-choice"
+              onClick={() => clearChoice(questionNumber)}
+            >
+              Clear choice
+            </button>
+          )}
         </div>
       </fieldset>
     </div>
