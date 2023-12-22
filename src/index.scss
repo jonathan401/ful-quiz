@@ -84,6 +84,17 @@ body {
   font-family: "Rubik", var(--fallbck-font);
   overflow-x: hidden;
   background-color: var(--bg);
+  display: grid;
+}
+
+#root {
+  height: 100%;
+}
+
+.app {
+  display: grid;
+  height: 100%;
+  grid-template-rows: auto 1fr;
 }
 
 main {
@@ -132,17 +143,14 @@ main {
 }
 
 .btn {
-  // white-space: nowrap;
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.65em clamp(0.6em, 4vw, 1.5em);
   border: none;
   font-weight: 500;
   font-size: clamp(0.9em, 4vw, 1em);
-  // min-width: 6rem;
   border-radius: 10rem;
-  // box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.1);
   transition: opacity 200ms ease, background-color 150ms ease;
 
   &:focus {
@@ -167,6 +175,13 @@ main {
     color: var(--soft-red);
   }
 
+  &--primary,
+  &--secondary,
+  &--outlined {
+    min-width: 7rem;
+    padding: 0.65em clamp(0.6em, 4vw, 1.5em);
+  }
+
   &--primary {
     background-color: var(--soft-blue);
     color: white;
@@ -186,6 +201,7 @@ main {
   }
 
   &--ghost {
+    padding: 0;
     background-color: transparent;
     color: var(--very-dark-blue);
 
@@ -199,43 +215,5 @@ main {
     // outline-offset: 3px;
     background-color: transparent;
     color: var(--soft-blue);
-  }
-}
-
-.quiz-btn__container {
-  display: flex;
-  gap: 0.4rem;
-  margin: 0.75rem 0;
-  padding: 0.8rem 0;
-  border-top: 1px solid var(--grayish-blue);
-  flex-wrap: wrap;
-}
-
-.quiz-progress-btn-group {
-  margin: 1rem 0;
-  display: flex;
-  gap: 0.5rem;
-  width: 100%;
-
-  &__btn {
-    padding: 0.5em 1em;
-    width: fit-content;
-    background-color: var(--soft-blue);
-    color: var(--white);
-    border: none;
-    outline: 1px solid var(--border-color);
-    border-radius: var(--rounded-sm);
-    font-size: 1em;
-    font-weight: 500;
-    transition: opacity 150ms ease, outline 150ms ease;
-
-    &:hover {
-      opacity: 0.8;
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--soft-blue);
-      outline-offset: 2px;
-    }
   }
 }

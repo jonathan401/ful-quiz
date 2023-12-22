@@ -8,12 +8,13 @@ import { routes } from "./pages/routes";
 // component imports
 import { Navbar } from "./components/Navbar";
 import QuizProvider from "./context/QuizContext";
+import { NotFoundEmptyState } from "./components/NotFoundEmptyState";
 
 const API = "https://opentdb.com/api.php?amount=10";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Navbar />
       <main>
         <QuizProvider>
@@ -27,7 +28,17 @@ function App() {
                 />
               ))}
               <Route path="/courses/:id" />
-              <Route path="*" element={<p>Not found</p>} />
+              <Route
+                path="*"
+                element={
+                  <NotFoundEmptyState
+                    title="Page not found"
+                    redirectUrl="/"
+                    redirectText="Go home"
+                    type="not found"
+                  />
+                }
+              />
             </Routes>
           </div>
         </QuizProvider>
