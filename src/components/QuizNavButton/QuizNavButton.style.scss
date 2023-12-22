@@ -1,4 +1,4 @@
-.quiz-btn {
+.quiz-nav-btn {
   padding: 0.3em 0.75em;
   min-height: 2rem;
   min-width: 2rem;
@@ -9,10 +9,7 @@
   font-weight: 500;
   border-radius: var(--rounded-sm);
   transition: background-color 150ms ease, outline 150ms ease;
-
-  // &:hover:not(:active) {
-  //   background-color: var(--neutral);
-  // }
+  color: var(--text-color-1);
 
   &:focus,
   &--active {

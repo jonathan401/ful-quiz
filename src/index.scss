@@ -186,7 +186,7 @@ main {
   &--primary,
   &--secondary,
   &--outlined {
-    min-width: 10rem;
+    min-width: 9rem;
     padding: 0.85em clamp(0.6em, 4vw, 1em);
   }
 
@@ -220,7 +220,6 @@ main {
 
   &--outlined {
     outline: 2px solid var(--soft-blue);
-    // outline-offset: 3px;
     background-color: transparent;
     color: var(--soft-blue);
   }
