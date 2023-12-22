@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
 
 *,
 *::before,
@@ -22,6 +22,13 @@
   --neutral: hsl(0, 0%, 96%);
   --bg: hsl(0, 0%, 98%);
   --border-color: hsl(185, 18%, 88%);
+  --text-color: hsl(215, 19%, 35%);
+  --text-color-1: hsl(217, 33%, 17%);
+
+  --gradient-1: hsl(266, 64%, 44%);
+  --gradient-2: hsl(231, 67%, 41%);
+  --color-base-200: #fafafa;
+  --color-base-400: #e6ebf4;
 
   /* border radius */
   --rounded: 0.4rem;
@@ -94,12 +101,12 @@ body {
 .app {
   display: grid;
   height: 100%;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 1fr auto;
 }
 
 main {
   padding: 1rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .visually-hidden:not(:focus):not(:active) {

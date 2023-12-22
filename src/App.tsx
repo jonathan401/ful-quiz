@@ -9,6 +9,7 @@ import { routes } from "./pages/routes";
 import { Navbar } from "./components/Navbar";
 import QuizProvider from "./context/QuizContext";
 import { NotFoundEmptyState } from "./components/NotFoundEmptyState";
+import { Footer } from "./components/Footer";
 
 const API = "https://opentdb.com/api.php?amount=10";
 
@@ -43,6 +44,7 @@ function App() {
           </div>
         </QuizProvider>
       </main>
+      <Footer />
     </div>
   );
 }
