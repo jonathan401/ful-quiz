@@ -1,24 +1,32 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+
+// style import
+import "./Quiz.style.scss";
 
 import { useQuizContext } from "../../context/QuizContext";
 
 import Question from "../../components/Question/Question";
 import { range } from "../../utils";
 import QuizNavButton from "../../components/QuizNavButton/QuizNavButton";
-import { CoursesList, quiz, t } from "../../data";
-import { QuizQuestionType } from "../../types/quiz";
+import { t } from "../../data";
+import { NotFoundEmptyState } from "../../components/NotFoundEmptyState";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [showResult, setShowResult] = useState<boolean>(false);
   const { quizQuestions, answeredQuestions, reshuffleQuestions, setQuestions } =
     useQuizContext();
+  const navigate = useNavigate();
 
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   useEffect(() => {
     // set the questions wnen the page loads
-    setQuestions(t[`${id}`].questions);
+    if (!id || t[id] === undefined) {
+      navigate("*");
+    } else {
+      setQuestions(t[id].questions);
+    }
   }, [id]);
 
   const isLastQuestion = currentQuestion === quizQuestions.length - 1;
@@ -45,16 +53,23 @@ const Quiz = () => {
 
   if (!quizQuestions.length) {
     return (
-      <div>
-        <p>Not available</p>
-        <Link to="/courses">Go back to courses</Link>
-      </div>
+      <NotFoundEmptyState
+        title="Questions not available"
+        redirectUrl="/courses"
+        redirectText="Explore courses"
+        type="empty"
+      />
     );
   }
 
   return (
     <section className="quiz-container">
-      <Link to="/courses">Go back</Link>
+      <Link
+        to="/courses"
+        className="btn btn--ghost quiz-container__btn--redirect"
+      >
+        Go back
+      </Link>
       <h1 className="quiz-header">The FUL Quiz</h1>
       <div className="question-container">
         {!showResult && (
