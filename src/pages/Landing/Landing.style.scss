@@ -1,0 +1,71 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  background-image: url("../../assets/bg-pattern.avif");
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &__header {
+    font-size: clamp(1.7rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--text-color-1);
+    letter-spacing: 1px;
+  }
+
+  &__illustration {
+    padding: 2rem;
+    width: 100%;
+    max-width: 25rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 45em;
+  }
+
+  &__text {
+    line-height: 1.4;
+    text-align: center;
+    color: var(--text-color);
+    font-size: clamp(1rem, 5vw, 1.12rem);
+  }
+
+  @media screen and (min-width: 65em) {
+    & {
+      // background-color: red;
+      flex-direction: row-reverse;
+      gap: 4rem;
+      align-items: center;
+      justify-content: space-between;
+
+      &__illustration {
+        max-width: none;
+      }
+
+      &__content {
+        align-items: flex-start;
+        text-align: left;
+        max-width: 32rem;
+      }
+
+      &__text {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.gradient-text {
+  @media screen and (min-width: 65em) {
+    background: linear-gradient(to right, var(--gradient-1), var(--gradient-2));
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
