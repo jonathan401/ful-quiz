@@ -186,7 +186,7 @@ main {
   &--secondary,
   &--outlined {
     min-width: 7rem;
-    padding: 0.65em clamp(0.6em, 4vw, 1.5em);
+    padding: 1em clamp(0.6em, 4vw, 1.5em);
   }
 
   &--primary {
