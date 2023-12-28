@@ -14,9 +14,13 @@ import { NotFoundEmptyState } from "../../components/NotFoundEmptyState";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
-  const [showResult, setShowResult] = useState<boolean>(false);
-  const { quizQuestions, answeredQuestions, reshuffleQuestions, setQuestions } =
-    useQuizContext();
+  const {
+    quizQuestions,
+    answeredQuestions,
+    reshuffleQuestions,
+    setQuestions,
+    resetQuestions,
+  } = useQuizContext();
   const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
@@ -26,6 +30,8 @@ const Quiz = () => {
       navigate("*");
     } else {
       setQuestions(t[id].questions);
+      // clear answered questions
+      resetQuestions();
     }
   }, [id]);
 
@@ -35,7 +41,7 @@ const Quiz = () => {
     if (!isLastQuestion) {
       setCurrentQuestion((prevQuestion) => prevQuestion + 1);
     } else {
-      setShowResult(true);
+      navigate("/review");
     }
   };
 
@@ -48,7 +54,7 @@ const Quiz = () => {
   const retry = () => {
     reshuffleQuestions();
     setCurrentQuestion(0);
-    setShowResult(false);
+    // setShowResult(false);
   };
 
   if (!quizQuestions.length) {
@@ -72,62 +78,48 @@ const Quiz = () => {
       </Link>
       <h1 className="quiz-header">The FUL Quiz</h1>
       <div className="question-container">
-        {!showResult && (
-          <form className="question-form">
-            <Question
-              questionNumber={currentQuestion}
-              question={quizQuestions[currentQuestion].question}
-              options={quizQuestions[currentQuestion].choices}
-              questions={quizQuestions}
-            />
-            <div className="quiz-progress-btn-group">
-              <button
-                type="button"
-                onClick={handlePrevious}
-                className="quiz-progress-btn-group__btn"
-              >
-                Previous
-              </button>
-              <button
-                type="button"
-                onClick={handleNext}
-                className="quiz-progress-btn-group__btn"
-              >
-                {isLastQuestion ? "Finish" : "Next"}
-              </button>
-            </div>
-            <div className="quiz-btn__container">
-              {range(0, quizQuestions.length)?.map((num) => (
-                <QuizNavButton
-                  type="button"
-                  key={crypto.randomUUID()}
-                  text={num + 1}
-                  onClick={() => {
-                    setCurrentQuestion(num);
-                  }}
-                  active={currentQuestion === num}
-                  // answered={
-                  //   answeredQuestions
-                  //     ? answeredQuestions[num]?.answer?.length > 0
-                  //     : false
-                  // }
-                />
-              ))}
-            </div>
-          </form>
-        )}
-        {showResult && (
-          <div>
-            <p>Total questions: {quizQuestions.length}</p>
-            <p>
-              correct answers{" "}
-              {answeredQuestions.filter((answers) => answers.correct).length}
-            </p>
-            <button type="button" onClick={retry}>
-              Try again
+        <form className="question-form">
+          <Question
+            questionNumber={currentQuestion}
+            question={quizQuestions[currentQuestion].question}
+            options={quizQuestions[currentQuestion].choices}
+            questions={quizQuestions}
+          />
+          <div className="quiz-progress-btn-group">
+            <button
+              type="button"
+              onClick={handlePrevious}
+              className="quiz-progress-btn-group__btn"
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="quiz-progress-btn-group__btn"
+            >
+              {isLastQuestion ? "Finish" : "Next"}
             </button>
           </div>
-        )}
+          <div className="quiz-btn__container">
+            {range(0, quizQuestions.length)?.map((num) => (
+              <QuizNavButton
+                type="button"
+                key={crypto.randomUUID()}
+                text={num + 1}
+                onClick={() => {
+                  setCurrentQuestion(num);
+                }}
+                active={currentQuestion === num}
+                // answered={
+                //   answeredQuestions
+                //     ? answeredQuestions[num]?.answer?.length > 0
+                //     : false
+                // }
+              />
+            ))}
+          </div>
+        </form>
       </div>
     </section>
   );

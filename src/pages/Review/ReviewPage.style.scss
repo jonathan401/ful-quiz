@@ -1,0 +1,56 @@
+.review-page {
+  &__header {
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+}
+
+.review-meta {
+  padding: 0.85rem;
+  border-radius: var(--rounded);
+  border: 1px solid var(--border-color);
+  width: fit-content;
+  margin: 1rem 0;
+  background-color: var(--white);
+  box-shadow: 0px 4px 7px 0px #00000005;
+
+  p {
+    color: var(--text-color);
+    font-size: 1rem;
+  }
+}
+
+.review-questions-list {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.review-question {
+  &__header {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+  }
+
+  &__answers {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  &__answer {
+    padding: 0.7rem;
+    background-color: var(--white);
+    border-radius: var(--rounded);
+    border: 1px solid var(--border-color);
+
+    &--correct {
+      border-color: green;
+      border-width: 2px;
+    }
+
+    &--wrong {
+      border-color: var(--soft-red);
+      border-width: 2px;
+    }
+  }
+}
