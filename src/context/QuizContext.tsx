@@ -51,7 +51,7 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
       const choice = prevAnswers.filter(
         (answer) => answer.questionNumber === questionId
       )[0];
-      choice.answer = "";
+      choice.answer = null;
       return [...rest, choice];
     });
   };
