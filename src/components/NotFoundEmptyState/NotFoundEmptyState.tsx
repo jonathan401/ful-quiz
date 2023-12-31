@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 // image imports
-import NotFoundImage from "../../assets/not-found.svg";
-import EmptyImage from "../../assets/empty.svg";
+import NotFoundImage from "../../assets/not-found-red.svg";
+import EmptyImage from "../../assets/empty-red.svg";
 
 // styles
 import "./NotFoundEmptyState.style.scss";

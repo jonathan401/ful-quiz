@@ -13,6 +13,7 @@
 :root {
   /* primary */
   --soft-blue: hsl(231, 69%, 60%);
+  --primary: hsl(336, 100%, 50%);
   --soft-red: hsl(0, 94%, 66%);
 
   /* neutral */
@@ -44,6 +45,11 @@
 
 html:focus-within {
   scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--primary);
+  color: white;
 }
 
 img,
@@ -85,6 +91,23 @@ ul {
 button {
   cursor: pointer;
 }
+
+/*
+.kVUXdg {
+  width: 100%;
+  max-width: 320px;
+  background-color: var(--primary);
+  border: medium;
+  color: rgb(255, 255, 255);
+  border-radius: var(--radius);
+  height: 48px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: var(--weight-semi);
+  min-width: 160px;
+  cursor: pointer;
+  margin-top: 0px;
+*/
 
 body {
   min-height: 100vh;
@@ -156,9 +179,10 @@ main {
   justify-content: center;
   align-items: center;
   border: none;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 1em;
-  border-radius: 10rem;
+  // border-radius: 10rem;
+  border-radius: 0.45rem;
   transition: opacity 200ms ease, background-color 150ms ease;
 
   &:focus {
@@ -174,6 +198,7 @@ main {
   &-primary-hover:hover {
     background-color: transparent;
     outline: 3px solid var(--soft-blue);
+    // outline: 3px solid var(--soft-blue);
     color: var(--soft-blue);
   }
 
@@ -185,17 +210,19 @@ main {
 
   &--primary,
   &--secondary,
-  &--outlined {
+  &--outlined,
+  &--gradient {
     min-width: 9rem;
-    padding: 0.85em clamp(0.6em, 4vw, 1em);
+    padding: 0.8rem 1rem;
+    // padding: 0.85em clamp(0.6em, 4vw, 1em);
   }
 
   &--primary {
-    background-color: var(--soft-blue);
+    background-color: var(--primary);
     color: white;
 
     &:focus {
-      outline-color: var(--soft-blue);
+      outline-color: var(--primary);
     }
   }
 
@@ -214,13 +241,22 @@ main {
     color: var(--very-dark-blue);
 
     &:focus {
-      outline-color: var(--soft-blue);
+      outline-color: var(--primary);
     }
   }
 
   &--outlined {
-    outline: 2px solid var(--soft-blue);
+    outline: 2px solid var(--primary);
     background-color: transparent;
-    color: var(--soft-blue);
+    color: var(--primary);
+  }
+
+  &--gradient {
+    color: white;
+    background: linear-gradient(to right, var(--primary), var(--soft-red));
+
+    &:focus {
+      outline-color: var(--primary);
+    }
   }
 }
