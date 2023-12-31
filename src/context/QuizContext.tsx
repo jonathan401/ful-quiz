@@ -22,6 +22,7 @@ type QuizContextType = {
   reshuffleQuestions: () => void;
   setQuestions: Dispatch<SetStateAction<QuizQuestionType[]>>;
   clearChoice: (questionId: number) => void;
+  resetQuestions: () => void;
 };
 
 const QuizContext = createContext<QuizContextType>({
@@ -31,6 +32,7 @@ const QuizContext = createContext<QuizContextType>({
   reshuffleQuestions: () => {},
   setQuestions: () => {},
   clearChoice: () => {},
+  resetQuestions: () => {},
 });
 
 const QuizProvider = ({ children }: { children: ReactNode }) => {
@@ -49,7 +51,7 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
       const choice = prevAnswers.filter(
         (answer) => answer.questionNumber === questionId
       )[0];
-      choice.answer = "";
+      choice.answer = null;
       return [...rest, choice];
     });
   };
@@ -76,7 +78,7 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
                 : {
                     question: null,
                     answer: null,
-                    correct: null,
+                    correct: false,
                     questionNumber: i,
                   };
           }
@@ -93,6 +95,8 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
     setAnsweredQuestions([]);
   };
 
+  const resetQuestions = () => setAnsweredQuestions([]);
+
   const context = useMemo(() => {
     return {
       answeredQuestions,
@@ -101,6 +105,7 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
       reshuffleQuestions,
       setQuestions,
       clearChoice,
+      resetQuestions,
     };
   }, [questions, answeredQuestions]);
 

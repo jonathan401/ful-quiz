@@ -40,6 +40,13 @@
 
   /* container */
   --container-width: 80em;
+  --container-width-sm: 40em;
+
+  /*
+    box-shadow: 0px 3.5px 5.5px 0px #00000005;
+    border-radius: 15px;
+    hsla(210, 17%, 98%, 1)
+   */
 }
 
 html:focus-within {
@@ -72,10 +79,6 @@ h6 {
   overflow-wrap: break-word;
 }
 
-/* fieldset {
-  border: none;
-} */
-
 ul[role="list"],
 ul {
   list-style: none;
@@ -107,6 +110,7 @@ body {
 main {
   padding: 1rem;
   margin-top: 1rem;
+  display: flex;
 }
 
 .visually-hidden:not(:focus):not(:active) {
@@ -142,6 +146,12 @@ main {
   max-width: var(--container-width);
   margin: 0 auto;
   width: 100%;
+}
+
+.container-sm {
+  max-width: var(--container-width-sm);
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* button */
@@ -185,7 +195,7 @@ main {
   &--primary,
   &--secondary,
   &--outlined {
-    min-width: 10rem;
+    min-width: 9rem;
     padding: 0.85em clamp(0.6em, 4vw, 1em);
   }
 
@@ -219,7 +229,6 @@ main {
 
   &--outlined {
     outline: 2px solid var(--soft-blue);
-    // outline-offset: 3px;
     background-color: transparent;
     color: var(--soft-blue);
   }

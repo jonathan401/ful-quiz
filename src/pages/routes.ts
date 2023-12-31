@@ -3,6 +3,7 @@ import { FC } from "react";
 import { Courses } from "./Courses";
 import { Landing } from "./Landing";
 import { Quiz } from "./Quiz";
+import { ReviewPage } from "./Review";
 
 interface Routes {
   key: string;
@@ -25,5 +26,10 @@ export const routes: Routes[] = [
     key: "quiz-page",
     path: "/courses/:id",
     component: Quiz,
+  },
+  {
+    key: "review",
+    path: "/review",
+    component: ReviewPage,
   },
 ];

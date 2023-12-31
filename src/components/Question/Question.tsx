@@ -35,7 +35,7 @@ const Question = ({
   return (
     <div className="question">
       <h2 className="question__header">
-        {addLeadingZero(questionNumber + 1)} of {questions.length}
+        {questionNumber + 1}/{questions.length}
       </h2>
       <fieldset className="question-wrapper">
         <legend className="question__text">{question}</legend>

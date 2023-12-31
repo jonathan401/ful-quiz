@@ -18,9 +18,9 @@ const QuizNavButton: React.FC<QuizNavButtonProps> = ({
   return (
     <button
       {...rest}
-      className={`${active ? "quiz-btn quiz-btn--active" : "quiz-btn"} ${
-        answered ? "quiz-btn--answered" : "quiz-btn"
-      }`}
+      className={`${
+        active ? "quiz-nav-btn quiz-nav-btn--active" : "quiz-nav-btn"
+      } ${answered ? "quiz-nav-btn--answered" : "quiz-nav-btn"}`}
       // active ? ${''}
     >
       {text}
