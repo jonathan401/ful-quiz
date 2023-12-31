@@ -1,0 +1,98 @@
+.question {
+  /* background-color: red; */
+  max-width: 30rem;
+}
+.question__header {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+.question-wrapper {
+  border: none;
+  padding: 0;
+}
+.question__text {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+.question__options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.6rem;
+}
+.question__options-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.question__option-control {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+.question__option-control:focus + label {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+.question__option-control:checked + label {
+  background-color: var(--primary);
+  color: var(--white);
+  border-color: transparent;
+  -webkit-transition: background-color 200ms ease;
+  transition: background-color 200ms ease;
+}
+.question__alphabet {
+  margin-right: 0.4rem;
+}
+.question__option-label {
+  cursor: pointer;
+  padding: 0.6rem;
+  border-radius: var(--rounded);
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.question__option-label:hover {
+  background-color: var(--neutral);
+}
+.question__btn--clear-choice {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0 !important;
+  margin: 0.3rem 0;
+  position: relative;
+  color: var(--primary) !important;
+}
+.question__btn--clear-choice::after {
+  content: "";
+  position: absolute;
+  top: calc(100% + 0.1rem);
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  opacity: 0;
+  -webkit-transition: opacity 100ms linear;
+  transition: opacity 100ms linear;
+}
+.question__btn--clear-choice:focus {
+  outline: none !important;
+}
+.question__btn--clear-choice:focus::after {
+  opacity: 1;
+}

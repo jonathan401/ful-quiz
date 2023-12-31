@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
-
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 * {
@@ -15,7 +15,6 @@
   --soft-blue: hsl(231, 69%, 60%);
   --primary: hsl(336, 100%, 50%);
   --soft-red: hsl(0, 94%, 66%);
-
   /* neutral */
   --grayish-blue: hsl(229, 8%, 60%);
   --very-dark-blue: hsl(229, 31%, 21%);
@@ -25,33 +24,27 @@
   --border-color: hsl(185, 18%, 88%);
   --text-color: hsl(215, 19%, 35%);
   --text-color-1: hsl(217, 33%, 17%);
-
   --gradient-1: hsl(266, 64%, 44%);
   --gradient-2: hsl(231, 67%, 41%);
   --color-base-200: #fafafa;
   --color-base-400: #e6ebf4;
-
   /* border radius */
   --rounded: 0.4rem;
   --rounded-sm: 0.2rem;
-
   /* font */
   --fallbck-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
   /* container */
   --container-width: 80em;
-  --container-width-sm: 40em;
-
-  /*
-    box-shadow: 0px 3.5px 5.5px 0px #00000005;
-    border-radius: 15px;
-    hsla(210, 17%, 98%, 1)
-   */
 }
 
 html:focus-within {
   scroll-behavior: smooth;
+}
+
+::-moz-selection {
+  background-color: var(--primary);
+  color: white;
 }
 
 ::selection {
@@ -85,7 +78,10 @@ h6 {
   overflow-wrap: break-word;
 }
 
-ul[role="list"],
+/* fieldset {
+  border: none;
+} */
+ul[role=list],
 ul {
   list-style: none;
   padding: 0;
@@ -111,7 +107,6 @@ button {
   cursor: pointer;
   margin-top: 0px;
 */
-
 body {
   min-height: 100vh;
   font-family: "Rubik", var(--fallbck-font);
@@ -133,6 +128,8 @@ body {
 main {
   padding: 1rem;
   margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -153,16 +150,21 @@ main {
   font-weight: 600;
   display: block;
   padding: 0.25em 1em;
-  transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
   position: absolute;
   z-index: 9999;
+  -webkit-transition: -webkit-transform 0.1s ease-in-out;
+  transition: -webkit-transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
 }
 
 .skip-link:focus {
   outline: 2px solid var(--font-light);
   outline-offset: 3px;
-  transform: translateY(0);
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
 }
 
 .container {
@@ -171,101 +173,85 @@ main {
   width: 100%;
 }
 
-.container-sm {
-  max-width: var(--container-width-sm);
-  width: 100%;
-  margin: 0 auto;
-}
-
 /* button */
 .btn:is(a) {
   text-decoration: none;
 }
 
 .btn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: none;
   font-weight: 700;
   font-size: 1em;
-  // border-radius: 10rem;
   border-radius: 0.45rem;
+  -webkit-transition: opacity 200ms ease, background-color 150ms ease;
   transition: opacity 200ms ease, background-color 150ms ease;
-
-  &:focus {
-    outline-width: 2px;
-    outline-offset: 3px;
-    outline-style: solid;
-  }
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &-primary-hover:hover {
-    background-color: transparent;
-    outline: 3px solid var(--soft-blue);
-    // outline: 3px solid var(--soft-blue);
-    color: var(--soft-blue);
-  }
-
-  &-secondary-hover:hover {
-    background-color: transparent;
-    outline: 2px solid var(--soft-red);
-    color: var(--soft-red);
-  }
-
-  &--primary,
-  &--secondary,
-  &--outlined,
-  &--gradient {
-    min-width: 9rem;
-    padding: 0.8rem 1rem;
-    // padding: 0.85em clamp(0.6em, 4vw, 1em);
-  }
-
-  &--primary {
-    background-color: var(--primary);
-    color: white;
-
-    &:focus {
-      outline-color: var(--primary);
-    }
-  }
-
-  &--secondary {
-    background-color: var(--soft-red);
-    color: white;
-
-    &:focus {
-      outline-color: var(--soft-red);
-    }
-  }
-
-  &--ghost {
-    padding: 0;
-    background-color: transparent;
-    color: var(--very-dark-blue);
-
-    &:focus {
-      outline-color: var(--primary);
-    }
-  }
-
-  &--outlined {
-    outline: 2px solid var(--primary);
-    background-color: transparent;
-    color: var(--primary);
-  }
-
-  &--gradient {
-    color: white;
-    background: linear-gradient(to right, var(--primary), var(--soft-red));
-
-    &:focus {
-      outline-color: var(--primary);
-    }
-  }
+}
+.btn:focus {
+  outline-width: 2px;
+  outline-offset: 3px;
+  outline-style: solid;
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn-primary-hover:hover {
+  background-color: transparent;
+  outline: 3px solid var(--soft-blue);
+  color: var(--soft-blue);
+}
+.btn-secondary-hover:hover {
+  background-color: transparent;
+  outline: 2px solid var(--soft-red);
+  color: var(--soft-red);
+}
+.btn--primary, .btn--secondary, .btn--outlined, .btn--gradient {
+  min-width: 9rem;
+  padding: 0.8rem 1rem;
+}
+.btn--primary {
+  background-color: var(--primary);
+  color: white;
+}
+.btn--primary:focus {
+  outline-color: var(--primary);
+}
+.btn--secondary {
+  background-color: var(--soft-red);
+  color: white;
+}
+.btn--secondary:focus {
+  outline-color: var(--soft-red);
+}
+.btn--ghost {
+  padding: 0;
+  background-color: transparent;
+  color: var(--very-dark-blue);
+}
+.btn--ghost:focus {
+  outline-color: var(--primary);
+}
+.btn--outlined {
+  outline: 2px solid var(--primary);
+  background-color: transparent;
+  color: var(--primary);
+}
+.btn--gradient {
+  color: white;
+  background: -webkit-gradient(linear, left top, right top, from(var(--primary)), to(var(--soft-red)));
+  background: linear-gradient(to right, var(--primary), var(--soft-red));
+}
+.btn--gradient:focus {
+  outline-color: var(--primary);
 }

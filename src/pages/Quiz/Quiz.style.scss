@@ -22,7 +22,8 @@
   &__btn {
     padding: 0.5em 1em;
     width: fit-content;
-    background-color: var(--soft-blue);
+    // background-color: var(--soft-blue);
+    background-color: var(--primary);
     color: var(--white);
     border: none;
     outline: 1px solid var(--border-color);
@@ -36,7 +37,8 @@
     }
 
     &:focus-visible {
-      outline: 2px solid var(--soft-blue);
+      // outline: 2px solid var(--soft-blue);
+      outline: 2px solid var(--primary);
       outline-offset: 2px;
     }
   }
