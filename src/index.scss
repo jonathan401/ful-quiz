@@ -41,6 +41,13 @@
 
   /* container */
   --container-width: 80em;
+  --container-width-sm: 40em;
+
+  /*
+    box-shadow: 0px 3.5px 5.5px 0px #00000005;
+    border-radius: 15px;
+    hsla(210, 17%, 98%, 1)
+   */
 }
 
 html:focus-within {
@@ -77,10 +84,6 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
-
-/* fieldset {
-  border: none;
-} */
 
 ul[role="list"],
 ul {
@@ -166,6 +169,12 @@ main {
   max-width: var(--container-width);
   margin: 0 auto;
   width: 100%;
+}
+
+.container-sm {
+  max-width: var(--container-width-sm);
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* button */
