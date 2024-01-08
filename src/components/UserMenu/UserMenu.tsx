@@ -53,7 +53,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ photoUrl }) => {
           />
         ) : (
           <span className="user-menu__name-bubble">
-            {currentUser?.displayName[0]}
+            {currentUser &&
+              currentUser.displayName &&
+              currentUser.displayName[0]}
           </span>
         )}
       </button>
