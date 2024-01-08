@@ -22,7 +22,7 @@ const Landing = () => {
             curiosity, challenge your brain, and discover the joy of learning
             through our captivating quizzes
           </p>
-          <Link to="/auth/signup" className="btn btn--gradient">
+          <Link to="/auth/signin" className="btn btn--gradient">
             Get started
           </Link>
         </div>

@@ -104,6 +104,7 @@ header {
   z-index: 10;
   background-color: var(--white);
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.07);
+  border-radius: var(--rounded);
   padding: 1rem;
   width: 100%;
   max-width: 30rem;
@@ -127,6 +128,7 @@ header {
   }
 
   /* media queries */
+  // larger screens
   @media screen and (min-width: 45em) {
     position: static;
     opacity: 1;
@@ -138,6 +140,7 @@ header {
     width: fit-content;
     padding: 0;
     overflow: visible;
+    border-radius: none;
 
     &__list {
       flex-direction: row;
