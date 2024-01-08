@@ -4,7 +4,9 @@ import { Courses } from "./Courses";
 import { Landing } from "./Landing";
 import { Quiz } from "./Quiz";
 import { ReviewPage } from "./Review";
-import SignUpForm from "./Authentication/SignUpForm";
+import SignUpForm from "./Authentication/SignupForm";
+import LoginForm from "./Authentication/LoginForm";
+import PasswordRecovery from "./PasswordRecovery/PasswordRecovery";
 
 interface Routes {
   key: string;
@@ -12,12 +14,30 @@ interface Routes {
   component: FC;
 }
 
-export const routes: Routes[] = [
+export const publicRoutes: Routes[] = [
   {
     key: "landing-route",
     path: "/",
     component: Landing,
   },
+  {
+    key: "sign-up",
+    path: "/auth/register",
+    component: SignUpForm,
+  },
+  {
+    key: "sign-in",
+    path: "/auth/signin",
+    component: LoginForm,
+  },
+  {
+    key: "recovery",
+    path: "/password-recovery",
+    component: PasswordRecovery,
+  },
+];
+
+export const protectedRoutes: Routes[] = [
   {
     key: "courses-page",
     path: "/courses",
@@ -32,10 +52,5 @@ export const routes: Routes[] = [
     key: "review",
     path: "/review",
     component: ReviewPage,
-  },
-  {
-    key: "sign-up",
-    path: "/auth/signup",
-    component: SignUpForm,
   },
 ];
