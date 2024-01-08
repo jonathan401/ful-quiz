@@ -1,4 +1,4 @@
-import React, { ComponentProps, useState } from "react";
+import React, { ComponentProps, HTMLInputTypeAttribute, useState } from "react";
 
 // style
 import "./Input.style.scss";
@@ -16,22 +16,30 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       React.HTMLInputTypeAttribute | undefined
     >(rest.type);
 
-    const toggleInputType = () => {
-      setInputType(inputType === "password" ? "text" : "password");
+    const toggleType = () => {
+      setInputType((prevType) =>
+        prevType === "password" ? "text" : "password"
+      );
     };
 
     return (
       <div
         className={isTypePassword ? "input--is-type-password" : "input-wrapper"}
       >
-        <input {...rest} aria-label={label} ref={ref} type={inputType} />
+        <input
+          {...rest}
+          aria-label={label}
+          ref={ref}
+          type={inputType}
+          // type={showPassword ? "text" : "password"}
+        />
         {isTypePassword && (
           <button
             type="button"
             className="input--is-type-password__visibility-toggle"
             role="checkbox"
-            aria-checked={inputType === "password" ? "false" : "true"}
-            onClick={toggleInputType}
+            aria-checked={inputType === "password" ? "true" : "false"}
+            onClick={toggleType}
             aria-label="set password as visible"
           >
             {inputType === "password" && <AiOutlineEyeInvisible />}

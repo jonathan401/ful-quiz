@@ -24,8 +24,10 @@ input {
   border: 1px solid var(--border-color);
   padding: 0.65em 0.8em;
   width: 100%;
+  color: var(--text-color);
 
   &::placeholder {
+    color: var(--text-color);
     font-weight: 300;
   }
 
