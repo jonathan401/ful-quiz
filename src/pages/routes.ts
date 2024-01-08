@@ -4,6 +4,7 @@ import { Courses } from "./Courses";
 import { Landing } from "./Landing";
 import { Quiz } from "./Quiz";
 import { ReviewPage } from "./Review";
+import SignUpForm from "./Authentication/SignUpForm";
 
 interface Routes {
   key: string;
@@ -31,5 +32,10 @@ export const routes: Routes[] = [
     key: "review",
     path: "/review",
     component: ReviewPage,
+  },
+  {
+    key: "sign-up",
+    path: "/auth/signup",
+    component: SignUpForm,
   },
 ];

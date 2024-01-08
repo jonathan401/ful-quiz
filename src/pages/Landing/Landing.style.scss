@@ -6,7 +6,7 @@
   align-items: center;
   gap: 2rem;
   // background-image: url("../../assets/landing-pattern-bg.png");
-  background-image: url("../../assets/landing-pattern-bg.png");
+  background-image: url("../../assets/css-pattern-by-magicpattern-blue.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -87,7 +87,7 @@
 }
 
 .gradient-text {
-  background: linear-gradient(to right, var(--primary), var(--soft-red));
+  background: linear-gradient(to right, var(--soft-blue), var(--gradient-1));
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }

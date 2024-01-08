@@ -1,0 +1,36 @@
+.input--is-type-password {
+  position: relative;
+
+  &__visibility-toggle {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    height: 60%;
+    color: var(--text-color);
+
+    &:focus {
+      border-radius: var(--rounded-sm);
+      outline: 1px solid var(--soft-blue);
+    }
+  }
+}
+
+input {
+  border-radius: var(--rounded-sm);
+  border: 1px solid var(--border-color);
+  padding: 0.65em 0.8em;
+  width: 100%;
+
+  &::placeholder {
+    font-weight: 300;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--soft-blue);
+  }
+}
