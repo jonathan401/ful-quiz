@@ -44,7 +44,7 @@
   --container-width-sm: 40em;
 
   /* font */
-  --text-size: clamp(0.95rem, 4vw, 1rem);
+  --text-size: clamp(0.9rem, 4vw, 0.9rem);
 
   --box-shadow: 0px 3.5px 5.5px 0px #00000005;
 
@@ -339,7 +339,7 @@ input {
   gap: 1rem;
   width: 100%;
   max-width: 30rem;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: var(--rounded);
   background-color: var(--white);
   box-shadow: 0px 3.5px 5.5px 0px #00000005;
