@@ -1,50 +1,76 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { quiz } from "./data";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.minimal.css";
 
 // helpers
-import { routes } from "./pages/routes";
+import { protectedRoutes, publicRoutes } from "./pages/routes";
 
 // component imports
 import { Navbar } from "./components/Navbar";
 import QuizProvider from "./context/QuizContext";
 import { NotFoundEmptyState } from "./components/NotFoundEmptyState";
 import { Footer } from "./components/Footer";
+import AuthProvider from "./context/AuthContext";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
 
 const API = "https://opentdb.com/api.php?amount=10";
 
 function App() {
   return (
     <div className="app">
-      <Navbar />
-      <main>
-        <QuizProvider>
-          <div className="container">
-            <Routes>
-              {routes.map((route) => (
-                <Route
-                  key={route.key}
-                  path={route.path}
-                  element={<route.component />}
-                />
-              ))}
-              <Route path="/courses/:id" />
-              <Route
-                path="*"
-                element={
-                  <NotFoundEmptyState
-                    title="Page not found"
-                    redirectUrl="/"
-                    redirectText="Go home"
-                    type="not found"
+      <AuthProvider>
+        <Navbar />
+        <main>
+          <QuizProvider>
+            <div className="container">
+              <Routes>
+                {/* public routes */}
+                {publicRoutes.map((route) => (
+                  <Route
+                    key={route.key}
+                    path={route.path}
+                    element={<route.component />}
                   />
-                }
-              />
-            </Routes>
-          </div>
-        </QuizProvider>
-      </main>
-      <Footer />
+                ))}
+
+                {/* protected routes */}
+                <Route element={<ProtectedRoutes />}>
+                  {protectedRoutes.map((route) => (
+                    <Route
+                      key={route.key}
+                      path={route.path}
+                      element={<route.component />}
+                    />
+                  ))}
+                </Route>
+                <Route
+                  path="*"
+                  element={
+                    <NotFoundEmptyState
+                      title="Page not found"
+                      redirectUrl="/"
+                      redirectText="Go home"
+                      type="not found"
+                    />
+                  }
+                />
+              </Routes>
+            </div>
+          </QuizProvider>
+        </main>
+        <Footer />
+        <ToastContainer
+          autoClose={3000}
+          limit={1}
+          position={toast.POSITION.TOP_CENTER}
+          hideProgressBar={true}
+          closeOnClick={true}
+          pauseOnHover={false}
+          draggable={true}
+        />
+      </AuthProvider>
     </div>
   );
 }

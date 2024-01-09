@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // style
 import "./Landing.style.scss";
 
-import HeroIllustration from "../../assets/mind-red.svg";
+import HeroIllustration from "../../assets/mind-blue.svg";
 
 const Landing = () => {
   return (
@@ -22,7 +22,7 @@ const Landing = () => {
             curiosity, challenge your brain, and discover the joy of learning
             through our captivating quizzes
           </p>
-          <Link to="/courses" className="btn btn--gradient">
+          <Link to="/auth/signin" className="btn btn--gradient">
             Get started
           </Link>
         </div>
