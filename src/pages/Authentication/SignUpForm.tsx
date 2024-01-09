@@ -46,7 +46,7 @@ const SignUpForm = () => {
     <section className="c">
       <h1 className="page-header visually-hidden">Sign up</h1>
       <div className="auth-form-container">
-        <h2>Sign up</h2>
+        <h2 className="page-header-2">Sign up</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label htmlFor="sign-up-username" className="form-label">
