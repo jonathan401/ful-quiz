@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "build",
+    "site": "ful-quiz.web.app",
     "ignore": [
       "firebase.json",
       "**/.*",
