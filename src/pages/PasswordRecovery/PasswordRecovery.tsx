@@ -32,45 +32,49 @@ const PasswordRecovery = () => {
     } catch (err: any) {
       toast.error("An error occured");
     }
-    data.email = "";
   };
 
   return (
-    <div className="c password-recover-container">
+    <section className="c">
       <h1 className="page-header">Password Recovery</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group">
-          <label htmlFor="password-recovery-email" className="form-label">
-            Email
-          </label>
-          <Input
-            autoComplete="off"
-            type="text"
-            placeholder="Enter email"
-            id="password-recovery-email"
-            className="form-control"
-            {...register("email", {
-              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-              required: true,
-            })}
-            aria-invalid={errors.email ? "true" : "false"}
-          />
-          {(errors.email?.type === "required" && (
-            <span className="form-error" role="alert">
-              email is required
-            </span>
-          )) ||
-            (errors.email?.type === "pattern" && (
+      <div className="auth-form-container">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-group">
+            <label htmlFor="password-recovery-email" className="form-label">
+              Email
+            </label>
+            <Input
+              autoComplete="off"
+              type="text"
+              placeholder="Enter email"
+              id="password-recovery-email"
+              className="form-control"
+              {...register("email", {
+                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                required: true,
+              })}
+              aria-invalid={errors.email ? "true" : "false"}
+            />
+            {(errors.email?.type === "required" && (
               <span className="form-error" role="alert">
-                Invalid email
+                email is required
               </span>
-            ))}
-        </div>
-        <Button loading={loading} className="btn btn--primary btn--full-width">
-          Reset password
-        </Button>
-      </form>
-    </div>
+            )) ||
+              (errors.email?.type === "pattern" && (
+                <span className="form-error" role="alert">
+                  Invalid email
+                </span>
+              ))}
+          </div>
+          <Button
+            loading={loading}
+            className="btn btn--primary btn--full-width"
+          >
+            Recover
+          </Button>
+        </form>
+      </div>
+    </section>
   );
 };
 
