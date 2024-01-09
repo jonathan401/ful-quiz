@@ -99,13 +99,13 @@ const LoginForm = () => {
             {loading ? "Signing in" : "Sign in"}
           </Button>
         </form>
-        <p className="auth-text">
-          Are you a new user?{" "}
-          <Link to="/auth/register" className="auth-link">
-            Create an account
-          </Link>
-        </p>
       </div>
+      <p className="auth-text">
+        Are you a new user?{" "}
+        <Link to="/auth/register" className="auth-link">
+          Create an account
+        </Link>
+      </p>
     </section>
   );
 };
