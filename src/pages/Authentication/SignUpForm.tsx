@@ -116,13 +116,13 @@ const SignUpForm = () => {
           </div>
           <button className="btn btn--primary btn--full-width">Sign up</button>
         </form>
-        <p className="auth-text">
-          Already have an account?{" "}
-          <Link to="/auth/signin" className="auth-link">
-            Log in
-          </Link>
-        </p>
       </div>
+      <p className="auth-text">
+        Already have an account?{" "}
+        <Link to="/auth/signin" className="auth-link">
+          Log in
+        </Link>
+      </p>
     </section>
   );
 };

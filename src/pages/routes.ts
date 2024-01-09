@@ -7,6 +7,8 @@ import { ReviewPage } from "./Review";
 import SignUpForm from "./Authentication/SignUpForm";
 import LoginForm from "./Authentication/LoginForm";
 import PasswordRecovery from "./PasswordRecovery/PasswordRecovery";
+import PasswordReset from "./PasswordReset/PasswordReset";
+import AuthAction from "./AuthAction/AuthAction";
 
 interface Routes {
   key: string;
@@ -31,9 +33,19 @@ export const publicRoutes: Routes[] = [
     component: LoginForm,
   },
   {
-    key: "recovery",
+    key: "password-recovery",
     path: "/password-recovery",
     component: PasswordRecovery,
+  },
+  {
+    key: "password-reset",
+    path: "/password-reset",
+    component: PasswordReset,
+  },
+  {
+    key: "auth-action",
+    path: "/auth-action",
+    component: AuthAction,
   },
 ];
 

@@ -145,9 +145,11 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     try {
       setLoading(true);
       const response = await sendPasswordResetEmail(auth, email, {
-        url: "https://ful-quiz.firebaseapp.com/reset-password",
+        url: "https://ful-quiz.firebaseapp.com/courses",
         handleCodeInApp: false,
       });
+      // const response = await sendPasswordResetEmail(auth, email);
+      console.log(response);
     } catch (err: any) {
       toast.error(firebaseAuthErrorMap[err.code]);
     } finally {
