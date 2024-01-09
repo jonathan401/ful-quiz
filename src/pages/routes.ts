@@ -4,7 +4,7 @@ import { Courses } from "./Courses";
 import { Landing } from "./Landing";
 import { Quiz } from "./Quiz";
 import { ReviewPage } from "./Review";
-import SignUpForm from "./Authentication/SignupForm";
+import SignUpForm from "./Authentication/SignUpForm";
 import LoginForm from "./Authentication/LoginForm";
 import PasswordRecovery from "./PasswordRecovery/PasswordRecovery";
 
