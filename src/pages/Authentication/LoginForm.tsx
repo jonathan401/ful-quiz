@@ -40,7 +40,7 @@ const LoginForm = () => {
     <section className="c">
       <h1 className="page-header visually-hidden">Login</h1>
       <div className="auth-form-container">
-        <h2>Login to your account</h2>
+        <h2 className="page-header-2">Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group">
             <label htmlFor="login-email" className="form-label">
