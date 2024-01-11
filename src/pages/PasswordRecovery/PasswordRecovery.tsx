@@ -28,7 +28,7 @@ const PasswordRecovery = () => {
   const onSubmit: SubmitHandler<PasswordRecoveryInput> = async (data) => {
     try {
       await resetPassword(data.email);
-      toast.success("Password reset link sent");
+      toast.success("A password reset link has been sent to your email");
     } catch (err: any) {
       toast.error("An error occured");
     }
@@ -74,15 +74,6 @@ const PasswordRecovery = () => {
             Recover password
           </Button>
         </form>
-        <div className="auth-flex">
-          <Link to="/signin" className="auth-link">
-            Login
-          </Link>{" "}
-          |{" "}
-          <Link to="/register" className="auth-link">
-            Sign in
-          </Link>
-        </div>
       </div>
     </section>
   );

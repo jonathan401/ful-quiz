@@ -6,6 +6,7 @@ import { confirmPasswordReset } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth } from "../../firebase-config";
 import { firebaseAuthErrorMap } from "../../helpers";
+import { useNavigate } from "react-router-dom";
 
 interface PasswordResetInputProps {
   password: string;
@@ -28,8 +29,8 @@ const PasswordReset: React.FC<PasswordResetProps> = ({ oobCode }) => {
       confirmPassword: "",
     },
   });
-
-  console.log(oobCode);
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<PasswordResetInputProps> = async (data) => {
     if (data.password !== data.confirmPassword) {
@@ -38,16 +39,21 @@ const PasswordReset: React.FC<PasswordResetProps> = ({ oobCode }) => {
     }
 
     try {
+      setLoading(true);
       if (oobCode) {
         await confirmPasswordReset(auth, oobCode, data.confirmPassword);
         setValue("password", "");
         setValue("confirmPassword", "");
         toast.success("Password successfully updated!");
+        setLoading(false);
+        navigate("/signin");
       } else {
         toast.error("something went wrong! Try again later!");
       }
     } catch (error: any) {
       toast.error(firebaseAuthErrorMap[error.code]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -96,7 +102,11 @@ const PasswordReset: React.FC<PasswordResetProps> = ({ oobCode }) => {
               </span>
             )}
           </div>
-          <Button className="btn btn--primary btn--full-width" type="submit">
+          <Button
+            className="btn btn--primary btn--full-width"
+            type="submit"
+            loading={loading}
+          >
             Reset password
           </Button>
         </form>
