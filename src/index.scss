@@ -317,6 +317,7 @@ input {
 .container-flexed {
   height: 100%;
   margin: 0 auto;
+  padding: 1rem 0;
 }
 
 .auth-container {
@@ -331,6 +332,16 @@ input {
 .container-sm {
   max-width: var(--container-width-sm);
   width: 100%;
+}
+
+.container-padded {
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @media screen and (min-width: 81em) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 // auth container
