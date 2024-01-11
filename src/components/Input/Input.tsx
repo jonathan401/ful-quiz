@@ -32,9 +32,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type="button"
             className="input--is-type-password__visibility-toggle"
             role="checkbox"
-            aria-checked={inputType === "password" ? "true" : "false"}
+            aria-checked={inputType === "password" ? "false" : "true"}
             onClick={toggleType}
-            aria-label={inputType === "password" ? "show" : "hide"}
+            aria-label="show password"
           >
             {inputType === "text" && <AiOutlineEyeInvisible />}
             {inputType === "password" && <AiOutlineEye />}
