@@ -4,16 +4,13 @@ import React, {
   ReactNode,
   SetStateAction,
   useContext,
-  useEffect,
   useMemo,
   useState,
 } from "react";
 import { QuizAnswerType, QuizQuestionType } from "../types/quiz";
 
 // data
-import { quiz, GST102 } from "../data";
 import { shuffleArray } from "../utils";
-import { useParams } from "react-router-dom";
 
 type QuizContextType = {
   answeredQuestions: QuizAnswerType[];
@@ -40,8 +37,6 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
     []
   );
   const [questions, setQuestions] = useState<QuizQuestionType[] | []>([]);
-
-  // console.log(CoursesList[0]);
 
   const clearChoice = (questionId: number) => {
     setAnsweredQuestions((prevAnswers) => {
