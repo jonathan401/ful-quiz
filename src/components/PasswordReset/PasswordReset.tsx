@@ -46,7 +46,7 @@ const PasswordReset: React.FC<PasswordResetProps> = ({ oobCode }) => {
         setValue("confirmPassword", "");
         toast.success("Password successfully updated!");
         setLoading(false);
-        navigate("/signin");
+        navigate("/auth/signin");
       } else {
         toast.error("something went wrong! Try again later!");
       }
