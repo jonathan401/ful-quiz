@@ -5,7 +5,7 @@ interface QuizListType {
   questions: QuizQuestionType[];
 }
 
-export interface testType {
+export interface QuizDataType {
   [key: string]: {
     title: string;
     code: string;
@@ -171,7 +171,7 @@ export const GST102: QuizListType = {
   ],
 };
 
-export const t: testType = {
+export const QuizData: QuizDataType = {
   gst101: {
     title: "English Language",
     code: "GST 101",
@@ -180,8 +180,8 @@ export const t: testType = {
   },
   pos101: {
     title: "English Language",
-    code: "GST 101",
-    key: "gst101",
+    code: "POS 101",
+    key: "pos101",
     questions: quiz.questions,
   },
   gst110: {
