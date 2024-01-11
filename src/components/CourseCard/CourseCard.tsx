@@ -12,7 +12,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ data }) => {
   const { title, code, key } = data;
   return (
     <li className="card">
-      {/* <div className="card__img"></div> */}
       <div className="card__content">
         <h2 className="card__header">{title}</h2>
         <div className="card-meta">
