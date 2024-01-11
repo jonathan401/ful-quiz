@@ -18,13 +18,13 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<LoginFormInput>({
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  const navigate = useNavigate();
 
   const { LogInWithEmail, loading } = userAuthContext();
 
@@ -37,7 +37,7 @@ const LoginForm = () => {
   };
 
   return (
-    <section className="c">
+    <section className="container-flexed">
       <h1 className="page-header visually-hidden">Login</h1>
       <div className="auth-form-container">
         <h2 className="page-header-2">Login</h2>

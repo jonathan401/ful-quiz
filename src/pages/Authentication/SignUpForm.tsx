@@ -6,6 +6,8 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { Input } from "../../components/Input";
 import { db, auth } from "../../firebase-config";
 import { userAuthContext } from "../../context/AuthContext";
+import Button from "../../components/Button/Button";
+import { toast } from "react-toastify";
 
 export interface SignupFormInput {
   username: string;
@@ -18,6 +20,7 @@ const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<SignupFormInput>({
     defaultValues: {
       username: "",
@@ -25,17 +28,12 @@ const SignUpForm = () => {
       password: "",
     },
   });
-  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { signUpWithEmail } = userAuthContext();
+  const { signUpWithEmail, loading } = userAuthContext();
 
   const onSubmit: SubmitHandler<SignupFormInput> = async (data) => {
     try {
-      const response = await signUpWithEmail(
-        data.username,
-        data.email,
-        data.password
-      );
+      await signUpWithEmail(data.username, data.email, data.password);
       navigate("/courses");
     } catch (err: any) {
       console.log("the error: ", err.code);
@@ -43,7 +41,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <section className="c">
+    <section className="container-flexed">
       <h1 className="page-header visually-hidden">Sign up</h1>
       <div className="auth-form-container">
         <h2 className="page-header-2">Sign up</h2>
@@ -114,7 +112,12 @@ const SignUpForm = () => {
               </span>
             )}
           </div>
-          <button className="btn btn--primary btn--full-width">Sign up</button>
+          <Button
+            className="btn btn--primary btn--full-width"
+            loading={loading}
+          >
+            Sign up
+          </Button>
         </form>
       </div>
       <p className="auth-text">
