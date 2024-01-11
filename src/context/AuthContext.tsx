@@ -105,10 +105,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
       setCurrentUser({ ...userCred.user, displayName: username });
     } catch (error: any) {
-      setError(firebaseAuthErrorMap[error.code]);
+      toast(firebaseAuthErrorMap[error.code]);
+      setLoading(false);
     } finally {
       setLoading(false);
-      setError("");
     }
   };
 
@@ -122,9 +122,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     } catch (err: any) {
       setError(firebaseAuthErrorMap[err.code]);
       toast.error(firebaseAuthErrorMap[err.code]);
-      setLoading(false);
     } finally {
       setError("");
+      setLoading(false);
     }
   };
 
@@ -142,14 +142,12 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const resetPassword = async (email: string) => {
+    setLoading(true);
     try {
-      setLoading(true);
-      const response = await sendPasswordResetEmail(auth, email, {
-        url: "https://ful-quiz.firebaseapp.com/auth-action",
+      return await sendPasswordResetEmail(auth, email, {
+        url: "https://ful-quiz.firebaseapp.com/courses",
         handleCodeInApp: false,
       });
-      // const response = await sendPasswordResetEmail(auth, email);
-      console.log(response);
     } catch (err: any) {
       toast.error(firebaseAuthErrorMap[err.code]);
     } finally {

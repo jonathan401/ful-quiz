@@ -5,4 +5,5 @@ export const firebaseAuthErrorMap: { [key: string]: string } = {
   "auth/too-many-requests": "Too many requests",
   "auth/user-not-found": "User not found",
   "auth/invalid-credential": "Invalid credentials",
+  "auth/invalid-action-code": "An error occured! Try again later",
 };

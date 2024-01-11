@@ -1,18 +1,27 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Input } from "../../components/Input";
-import Button from "../../components/Button/Button";
+import { Input } from "../Input";
+import Button from "../Button/Button";
+import { confirmPasswordReset } from "firebase/auth";
+import { toast } from "react-toastify";
+import { auth } from "../../firebase-config";
+import { firebaseAuthErrorMap } from "../../helpers";
 
 interface PasswordResetInputProps {
   password: string;
   confirmPassword: string;
 }
 
-const PasswordReset = () => {
+interface PasswordResetProps {
+  oobCode: string | null;
+}
+
+const PasswordReset: React.FC<PasswordResetProps> = ({ oobCode }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<PasswordResetInputProps>({
     defaultValues: {
       password: "",
@@ -20,8 +29,26 @@ const PasswordReset = () => {
     },
   });
 
+  console.log(oobCode);
+
   const onSubmit: SubmitHandler<PasswordResetInputProps> = async (data) => {
-    console.log(data);
+    if (data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    try {
+      if (oobCode) {
+        await confirmPasswordReset(auth, oobCode, data.confirmPassword);
+        setValue("password", "");
+        setValue("confirmPassword", "");
+        toast.success("Password successfully updated!");
+      } else {
+        toast.error("something went wrong! Try again later!");
+      }
+    } catch (error: any) {
+      toast.error(firebaseAuthErrorMap[error.code]);
+    }
   };
 
   return (
@@ -56,9 +83,9 @@ const PasswordReset = () => {
             <Input
               autoComplete="off"
               type="password"
-              placeholder="Enter password"
+              placeholder="Confirm password"
               id="reset-password-confirm"
-              {...register("password", { required: true })}
+              {...register("confirmPassword", { required: true })}
               className="form-control"
               isTypePassword
               aria-invalid={errors.confirmPassword ? "true" : "false"}
@@ -69,7 +96,7 @@ const PasswordReset = () => {
               </span>
             )}
           </div>
-          <Button className="btn btn--primary btn--full-width">
+          <Button className="btn btn--primary btn--full-width" type="submit">
             Reset password
           </Button>
         </form>
