@@ -26,13 +26,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div
         className={isTypePassword ? "input--is-type-password" : "input-wrapper"}
       >
-        <input
-          {...rest}
-          aria-label={label}
-          ref={ref}
-          type={inputType}
-          // type={showPassword ? "text" : "password"}
-        />
+        <input {...rest} aria-label={label} ref={ref} type={inputType} />
         {isTypePassword && (
           <button
             type="button"
@@ -40,10 +34,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             role="checkbox"
             aria-checked={inputType === "password" ? "true" : "false"}
             onClick={toggleType}
-            aria-label="set password as visible"
+            aria-label={inputType === "password" ? "show" : "hide"}
           >
-            {inputType === "password" && <AiOutlineEyeInvisible />}
-            {inputType === "text" && <AiOutlineEye />}
+            {inputType === "text" && <AiOutlineEyeInvisible />}
+            {inputType === "password" && <AiOutlineEye />}
           </button>
         )}
       </div>
