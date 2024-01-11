@@ -116,7 +116,7 @@ const SignUpForm = () => {
             className="btn btn--primary btn--full-width"
             loading={loading}
           >
-            Sign up
+            {loading ? "Loading" : "Sign up"}
           </Button>
         </form>
       </div>

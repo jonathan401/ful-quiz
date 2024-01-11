@@ -5,6 +5,7 @@ import { userAuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { firebaseAuthErrorMap } from "../../helpers";
 import Button from "../../components/Button/Button";
+import { Link } from "react-router-dom";
 
 interface PasswordRecoveryInput {
   email: string;
@@ -35,7 +36,7 @@ const PasswordRecovery = () => {
   };
 
   return (
-    <section className="c">
+    <section className="container-flexed">
       <h1 className="page-header">Password Recovery</h1>
       <div className="auth-form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -70,9 +71,18 @@ const PasswordRecovery = () => {
             loading={loading}
             className="btn btn--primary btn--full-width"
           >
-            Recover
+            Recover password
           </Button>
         </form>
+        <div className="auth-flex">
+          <Link to="/signin" className="auth-link">
+            Login
+          </Link>{" "}
+          |{" "}
+          <Link to="/register" className="auth-link">
+            Sign in
+          </Link>
+        </div>
       </div>
     </section>
   );

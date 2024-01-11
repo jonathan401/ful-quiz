@@ -1,20 +1,17 @@
-import { useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import PasswordReset from "../../components/PasswordReset/PasswordReset";
 
 const AuthAction = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const mode: string | null = searchParams.get("mode");
+  const oobCode: string | null = searchParams.get("oobCode");
 
-  useEffect(() => {
-    let mode: string | null = searchParams.get("mode");
-    if (mode === "resetPassword") {
-      navigate("/password-reset");
-    }
+  if (mode === "resetPassword") {
+    return <PasswordReset oobCode={oobCode} />;
+  }
 
-    // TODO: add mode setting for verifying user email
-  }, []);
-
-  return <div></div>;
+  // TODO: add for verifying user email too
+  return <div>An error occured</div>;
 };
 
 export default AuthAction;

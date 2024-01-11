@@ -142,10 +142,17 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const resetPassword = async (email: string) => {
-    return await sendPasswordResetEmail(auth, email, {
-      url: "https://ful-quiz.firebaseapp.com/courses",
-      handleCodeInApp: false,
-    });
+    setLoading(true);
+    try {
+      return await sendPasswordResetEmail(auth, email, {
+        url: "https://ful-quiz.firebaseapp.com/courses",
+        handleCodeInApp: false,
+      });
+    } catch (err: any) {
+      toast.error(firebaseAuthErrorMap[err.code]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contextValues = {

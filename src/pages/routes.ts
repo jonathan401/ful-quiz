@@ -7,7 +7,6 @@ import { ReviewPage } from "./Review";
 import SignUpForm from "./Authentication/SignUpForm";
 import LoginForm from "./Authentication/LoginForm";
 import PasswordRecovery from "./PasswordRecovery/PasswordRecovery";
-import PasswordReset from "../PasswordReset/PasswordReset";
 import AuthAction from "./AuthAction/AuthAction";
 
 interface Routes {
