@@ -52,7 +52,7 @@ const PasswordReset: React.FC<PasswordResetProps> = ({ oobCode }) => {
   };
 
   return (
-    <section className="c">
+    <section className="container-flexed">
       <h1 className="page-header-2">Reset password</h1>
       <div className="auth-form-container">
         <form onSubmit={handleSubmit(onSubmit)}>
