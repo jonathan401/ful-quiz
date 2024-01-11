@@ -15,13 +15,12 @@ const PasswordRecovery = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<PasswordRecoveryInput>({
     defaultValues: {
       email: "",
     },
   });
-
-  const formRef = useRef(null);
 
   const { resetPassword, loading } = userAuthContext();
 
@@ -32,6 +31,7 @@ const PasswordRecovery = () => {
     } catch (err: any) {
       toast.error("An error occured");
     }
+    setValue("email", "");
   };
 
   return (
