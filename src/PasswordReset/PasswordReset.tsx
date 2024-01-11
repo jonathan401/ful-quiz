@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Input } from "../../components/Input";
-import Button from "../../components/Button/Button";
+import { Input } from "../components/Input";
+import Button from "../components/Button/Button";
 
 interface PasswordResetInputProps {
   password: string;
   confirmPassword: string;
 }
 
-const PasswordReset = () => {
+interface PasswordResetProps {
+  oobCode: string | null;
+}
+
+const PasswordReset: React.FC<PasswordResetProps> = ({ oobCode }) => {
   const {
     register,
     handleSubmit,
@@ -19,6 +23,8 @@ const PasswordReset = () => {
       confirmPassword: "",
     },
   });
+
+  console.log(oobCode);
 
   const onSubmit: SubmitHandler<PasswordResetInputProps> = async (data) => {
     console.log(data);
