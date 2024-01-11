@@ -9,7 +9,7 @@ import { useQuizContext } from "../../context/QuizContext";
 import Question from "../../components/Question/Question";
 import { range } from "../../utils";
 import QuizNavButton from "../../components/QuizNavButton/QuizNavButton";
-import { t } from "../../data";
+import { QuizData } from "../../data";
 import { NotFoundEmptyState } from "../../components/NotFoundEmptyState";
 
 const Quiz = () => {
@@ -26,10 +26,10 @@ const Quiz = () => {
   const { id } = useParams<{ id: string }>();
   useEffect(() => {
     // set the questions wnen the page loads
-    if (!id || t[id] === undefined) {
+    if (!id || QuizData[id] === undefined) {
       navigate("*");
     } else {
-      setQuestions(t[id].questions);
+      setQuestions(QuizData[id].questions);
       // clear answered questions
       resetQuestions();
     }
@@ -54,7 +54,6 @@ const Quiz = () => {
   const retry = () => {
     reshuffleQuestions();
     setCurrentQuestion(0);
-    // setShowResult(false);
   };
 
   if (!quizQuestions.length) {
@@ -69,14 +68,8 @@ const Quiz = () => {
   }
 
   return (
-    <section className="quiz-container">
-      <Link
-        to="/courses"
-        className="btn btn--ghost quiz-container__btn--redirect"
-      >
-        Go back
-      </Link>
-      <h1 className="quiz-header">The FUL Quiz</h1>
+    <section className="quiz-container container-padded">
+      <h1 className="quiz-header">{id ? QuizData[id].code : "GST"}</h1>
       <div className="question-container">
         <form className="question-form">
           <Question

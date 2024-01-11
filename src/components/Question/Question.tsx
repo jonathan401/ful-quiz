@@ -34,16 +34,14 @@ const Question = ({
   };
   return (
     <div className="question">
-      <h2 className="question__header">
-        {questionNumber + 1}/{questions.length}
+      <h2 className="question__header page-header-2">
+        Question {questionNumber + 1}/{questions.length}
       </h2>
       <fieldset className="question-wrapper">
         <legend className="question__text">{question}</legend>
         <div className="question__options">
           {options.map((option, index) => {
             const optionId = crypto.randomUUID();
-
-            // console.log(answeredQuestions[questionNumber]);
             return (
               <div
                 key={optionId}
