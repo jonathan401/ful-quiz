@@ -41,7 +41,7 @@ const Quiz = () => {
     if (!id || QuizData[id] === undefined) {
       navigate("*");
     } else {
-      /* when the page loads, check if there is no questions in storage, if there isn't, 
+      /* when the page loads, check if there are no questions in storage, if there isn't, 
         then shuffle the questions, else use the questions in the session storage
        */
 
