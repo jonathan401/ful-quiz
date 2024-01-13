@@ -17,10 +17,8 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { toast } from "react-toastify";
-import { doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase-config";
 import { createUserDocument } from "../firebase-config/firebase-helpers";
-import { UsersCollectionType } from "../types/userCollectionType";
 import { firebaseAuthErrorMap } from "../helpers";
 
 interface AuthContextType {
