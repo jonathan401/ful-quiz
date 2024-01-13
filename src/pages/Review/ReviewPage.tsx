@@ -20,7 +20,7 @@ const Review = () => {
   );
 
   return (
-    <div className="container-sm review-page">
+    <div className="container-sm review-page container-padded">
       <h1 className="review-page__header">Summary</h1>
       <Link to="/courses">Go back to courses</Link>
       <div className="review-meta">
@@ -63,10 +63,12 @@ const Review = () => {
                       } review-question__answer`}
                       key={`option-${choiceIndex}`}
                     >
-                      <span className="question__alphabet" aria-hidden="true">
-                        {alphabetMap[choiceIndex]})
-                      </span>
-                      {choice}
+                      <p>
+                        <span className="question__alphabet" aria-hidden="true">
+                          {alphabetMap[choiceIndex]})
+                        </span>
+                        {choice}
+                      </p>
                     </li>
                   );
                 })}

@@ -4,6 +4,7 @@ import React, {
   ReactNode,
   SetStateAction,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -34,9 +35,20 @@ const QuizContext = createContext<QuizContextType>({
 
 const QuizProvider = ({ children }: { children: ReactNode }) => {
   const [answeredQuestions, setAnsweredQuestions] = useState<QuizAnswerType[]>(
-    []
+    () => {
+      const storedAnswersRef = sessionStorage.getItem("answers");
+      const storedAnswers =
+        storedAnswersRef !== null ? JSON.parse(storedAnswersRef) : [];
+      return storedAnswers;
+    }
   );
+
   const [questions, setQuestions] = useState<QuizQuestionType[] | []>([]);
+
+  // preserve state of questions on reload
+  useEffect(() => {
+    sessionStorage.setItem("answers", JSON.stringify(answeredQuestions));
+  }, [answeredQuestions]);
 
   const clearChoice = (questionId: number) => {
     setAnsweredQuestions((prevAnswers) => {

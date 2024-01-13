@@ -1,11 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // style
 import "./Landing.style.scss";
 
 import HeroIllustration from "../../assets/mind-blue.svg";
+import { userAuthContext } from "../../context/AuthContext";
+import { useEffect } from "react";
 
 const Landing = () => {
+  const { currentUser } = userAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/courses");
+    }
+  }, []);
   return (
     <div className="wrap">
       <section className="hero">

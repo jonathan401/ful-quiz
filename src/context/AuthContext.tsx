@@ -71,12 +71,6 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
-    if (currentUser) {
-      navigate("/courses");
-    }
-  }, [currentUser]);
-
-  useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (user) => {
       // when the auth state change changes, return the value accordingly
       setCurrentUser(user);

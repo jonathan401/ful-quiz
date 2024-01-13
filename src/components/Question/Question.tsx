@@ -77,15 +77,16 @@ const Question = ({
               </div>
             );
           })}
-          {answeredQuestions[questionNumber]?.answer && (
-            <button
-              type="button"
-              className="btn btn--ghost question__btn--clear-choice"
-              onClick={() => clearChoice(questionNumber)}
-            >
-              Clear choice
-            </button>
-          )}
+          {answeredQuestions.length > 0 &&
+            answeredQuestions[questionNumber]?.answer && (
+              <button
+                type="button"
+                className="btn btn--ghost question__btn--clear-choice"
+                onClick={() => clearChoice(questionNumber)}
+              >
+                Clear choice
+              </button>
+            )}
         </div>
       </fieldset>
     </div>

@@ -13,7 +13,15 @@ import { QuizData } from "../../data";
 import { NotFoundEmptyState } from "../../components/NotFoundEmptyState";
 
 const Quiz = () => {
-  const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+  const [currentQuestion, setCurrentQuestion] = useState<number>(() => {
+    const storedQuestionNumberRef = sessionStorage.getItem("currentQuestion");
+    const storedQuestionNumber: number =
+      storedQuestionNumberRef !== null
+        ? JSON.parse(storedQuestionNumberRef)
+        : 0;
+    return Number(storedQuestionNumber);
+  });
+  // const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const {
     quizQuestions,
     answeredQuestions,
@@ -24,16 +32,20 @@ const Quiz = () => {
   const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
+
   useEffect(() => {
-    // set the questions wnen the page loads
+    // check if there is the questions are available
     if (!id || QuizData[id] === undefined) {
       navigate("*");
     } else {
+      // set the questions wnen the page loads
       setQuestions(QuizData[id].questions);
-      // clear answered questions
-      resetQuestions();
     }
   }, [id]);
+
+  useEffect(() => {
+    sessionStorage.setItem("currentQuestion", String(currentQuestion));
+  }, [currentQuestion]);
 
   const isLastQuestion = currentQuestion === quizQuestions.length - 1;
 

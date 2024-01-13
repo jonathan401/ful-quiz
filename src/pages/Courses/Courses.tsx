@@ -1,12 +1,21 @@
+import { useEffect } from "react";
 import CourseCard from "../../components/CourseCard/CourseCard";
 import { userAuthContext } from "../../context/AuthContext";
 import { CoursesList } from "../../data";
 
 // style
 import "./Courses.style.scss";
+import { useQuizContext } from "../../context/QuizContext";
 
 const Courses = () => {
-  const { currentUser } = userAuthContext();
+  const { resetQuestions } = useQuizContext();
+
+  // reset answers on load
+  useEffect(() => {
+    sessionStorage.removeItem("answers");
+    sessionStorage.removeItem("currentQuestion");
+    resetQuestions();
+  }, []);
   return (
     <div className="container-padded">
       <div className="courses-list">
