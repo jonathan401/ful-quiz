@@ -193,7 +193,7 @@ p {
   border-radius: 0.45rem;
   transition: opacity 200ms ease, background-color 150ms ease;
 
-  &:focus {
+  &:not(.btn--ghost):focus {
     outline-width: 2px;
     outline-offset: 3px;
     outline-style: solid;
@@ -257,9 +257,17 @@ p {
     padding: 0;
     background-color: transparent;
     color: var(--very-dark-blue);
+    position: relative;
 
-    &:focus {
-      outline-color: var(--soft-blue);
+    &::after {
+      content: "";
+      position: absolute;
+      top: calc(100% + 0.1rem);
+      width: 100%;
+      height: 2px;
+      background-color: var(--soft-blue);
+      opacity: 0;
+      transition: opacity 100ms linear;
     }
   }
 

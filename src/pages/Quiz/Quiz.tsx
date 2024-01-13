@@ -7,14 +7,17 @@ import "./Quiz.style.scss";
 import { useQuizContext } from "../../context/QuizContext";
 
 import Question from "../../components/Question/Question";
-import { range } from "../../utils";
+import { range, shuffleArray } from "../../utils";
 import QuizNavButton from "../../components/QuizNavButton/QuizNavButton";
-import { QuizData } from "../../data";
+import { QuizData, quiz } from "../../data";
 import { NotFoundEmptyState } from "../../components/NotFoundEmptyState";
+import { STORAGE_CONSTANTS } from "../../constants";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(() => {
-    const storedQuestionNumberRef = sessionStorage.getItem("currentQuestion");
+    const storedQuestionNumberRef = sessionStorage.getItem(
+      STORAGE_CONSTANTS.CURRENT_QUESTION
+    );
     const storedQuestionNumber: number =
       storedQuestionNumberRef !== null
         ? JSON.parse(storedQuestionNumberRef)
@@ -38,13 +41,22 @@ const Quiz = () => {
     if (!id || QuizData[id] === undefined) {
       navigate("*");
     } else {
-      // set the questions wnen the page loads
-      setQuestions(QuizData[id].questions);
+      /* when the page loads, check if there is no questions in storage, if there isn't, 
+        then shuffle the questions, else use the questions in the session storage
+       */
+
+      if (!quizQuestions.length) {
+        const shuffledQuestions = shuffleArray(QuizData[id].questions);
+        setQuestions(shuffledQuestions);
+      }
     }
   }, [id]);
 
   useEffect(() => {
-    sessionStorage.setItem("currentQuestion", String(currentQuestion));
+    sessionStorage.setItem(
+      STORAGE_CONSTANTS.CURRENT_QUESTION,
+      String(currentQuestion)
+    );
   }, [currentQuestion]);
 
   const isLastQuestion = currentQuestion === quizQuestions.length - 1;

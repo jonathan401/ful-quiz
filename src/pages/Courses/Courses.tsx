@@ -6,15 +6,18 @@ import { CoursesList } from "../../data";
 // style
 import "./Courses.style.scss";
 import { useQuizContext } from "../../context/QuizContext";
+import { STORAGE_CONSTANTS } from "../../constants";
 
 const Courses = () => {
-  const { resetQuestions } = useQuizContext();
+  const { resetQuestions, setQuestions } = useQuizContext();
 
   // reset answers on load
   useEffect(() => {
-    sessionStorage.removeItem("answers");
-    sessionStorage.removeItem("currentQuestion");
     resetQuestions();
+    setQuestions([]);
+    sessionStorage.removeItem(STORAGE_CONSTANTS.ANSWERS);
+    sessionStorage.removeItem(STORAGE_CONSTANTS.CURRENT_QUESTION);
+    sessionStorage.removeItem(STORAGE_CONSTANTS.QUESTIONS);
   }, []);
   return (
     <div className="container-padded">

@@ -9,6 +9,7 @@ import React, {
   useState,
 } from "react";
 import { QuizAnswerType, QuizQuestionType } from "../types/quiz";
+import { STORAGE_CONSTANTS } from "../constants";
 
 // data
 import { shuffleArray } from "../utils";
@@ -36,19 +37,38 @@ const QuizContext = createContext<QuizContextType>({
 const QuizProvider = ({ children }: { children: ReactNode }) => {
   const [answeredQuestions, setAnsweredQuestions] = useState<QuizAnswerType[]>(
     () => {
-      const storedAnswersRef = sessionStorage.getItem("answers");
+      const storedAnswersRef = sessionStorage.getItem(
+        STORAGE_CONSTANTS.ANSWERS
+      );
       const storedAnswers =
         storedAnswersRef !== null ? JSON.parse(storedAnswersRef) : [];
       return storedAnswers;
     }
   );
 
-  const [questions, setQuestions] = useState<QuizQuestionType[] | []>([]);
+  const [questions, setQuestions] = useState<QuizQuestionType[] | []>(() => {
+    const storedAnswersRef = sessionStorage.getItem(
+      STORAGE_CONSTANTS.QUESTIONS
+    );
+    const storedAnswers =
+      storedAnswersRef !== null ? JSON.parse(storedAnswersRef) : [];
+    return storedAnswers;
+  });
 
   // preserve state of questions on reload
   useEffect(() => {
-    sessionStorage.setItem("answers", JSON.stringify(answeredQuestions));
+    sessionStorage.setItem(
+      STORAGE_CONSTANTS.ANSWERS,
+      JSON.stringify(answeredQuestions)
+    );
   }, [answeredQuestions]);
+
+  useEffect(() => {
+    sessionStorage.setItem(
+      STORAGE_CONSTANTS.QUESTIONS,
+      JSON.stringify(questions)
+    );
+  }, [questions]);
 
   const clearChoice = (questionId: number) => {
     setAnsweredQuestions((prevAnswers) => {
@@ -69,9 +89,7 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
       if (questionId >= 0 && questionId < prevAnswers.length) {
         return prevAnswers.map((obj, i) => (i === questionId ? answer : obj));
       } else {
-        // return [..previousAnswers, answer];
-        // if the index does not exists
-        // REVIEW: THIS IS REALLY HACKY
+        //  THIS IS REALLY HACKY
         /* 
           when the user answers a question, save that question and if it is edited, find that question and update
           its value. If the question is being answered for the first time, add that answer to the question
