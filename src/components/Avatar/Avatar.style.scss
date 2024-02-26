@@ -1,0 +1,17 @@
+.avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  display: grid;
+  place-content: center;
+  font-weight: 500;
+  color: var(--text-color);
+  border-radius: 50%;
+  background-color: var(--border-color);
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
+  }
+}
