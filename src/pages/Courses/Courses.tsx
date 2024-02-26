@@ -18,17 +18,18 @@ const Courses = () => {
     sessionStorage.removeItem(STORAGE_CONSTANTS.ANSWERS);
     sessionStorage.removeItem(STORAGE_CONSTANTS.CURRENT_QUESTION);
     sessionStorage.removeItem(STORAGE_CONSTANTS.QUESTIONS);
+    sessionStorage.removeItem(STORAGE_CONSTANTS.TIME);
   }, []);
   return (
-    <div className="container-padded">
-      <div className="courses-list">
+    <div className="container container-padded">
+      <section className="courses-list">
         <h1 className="page-header-2">Courses</h1>
         <ul className="courses-list__items">
           {CoursesList.map((course) => (
             <CourseCard key={course.key} data={course} />
           ))}
         </ul>
-      </div>
+      </section>
     </div>
   );
 };

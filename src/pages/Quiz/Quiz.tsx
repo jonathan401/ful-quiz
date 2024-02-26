@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 // style import
 import "./Quiz.style.scss";
@@ -9,9 +9,10 @@ import { useQuizContext } from "../../context/QuizContext";
 import Question from "../../components/Question/Question";
 import { range, shuffleArray } from "../../utils";
 import QuizNavButton from "../../components/QuizNavButton/QuizNavButton";
-import { QuizData, quiz } from "../../data";
+import { QuizData } from "../../data";
 import { NotFoundEmptyState } from "../../components/NotFoundEmptyState";
 import { STORAGE_CONSTANTS } from "../../constants";
+import { useTimer } from "../../hooks/useTimer";
 
 const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(() => {
@@ -24,7 +25,6 @@ const Quiz = () => {
         : 0;
     return Number(storedQuestionNumber);
   });
-  // const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const {
     quizQuestions,
     answeredQuestions,
@@ -35,11 +35,18 @@ const Quiz = () => {
   const navigate = useNavigate();
 
   const { id } = useParams<{ id: string }>();
+  const { formattedMinutes, formattedSeconds, secondsLeft, stopTimer } =
+    useTimer(5);
+
+  if (secondsLeft <= 0) {
+    console.log("time up");
+    // navigate("/review");
+  }
 
   useEffect(() => {
     // check if there is the questions are available
     if (!id || QuizData[id] === undefined) {
-      navigate("*");
+      navigate("*", { replace: true });
     } else {
       /* when the page loads, check if there are no questions in storage, if there isn't, 
         then shuffle the questions, else use the questions in the session storage
@@ -65,7 +72,10 @@ const Quiz = () => {
     if (!isLastQuestion) {
       setCurrentQuestion((prevQuestion) => prevQuestion + 1);
     } else {
-      navigate("/review");
+      // TODO: display a modal that confirms that confirms if the user wants to submit or not
+      // stopTimer();
+      navigate("/review", { replace: true });
+      sessionStorage.removeItem(STORAGE_CONSTANTS.TIME);
     }
   };
 
@@ -81,6 +91,8 @@ const Quiz = () => {
   };
 
   if (!quizQuestions.length) {
+    sessionStorage.removeItem(STORAGE_CONSTANTS.TIME);
+    sessionStorage.removeItem(STORAGE_CONSTANTS.CURRENT_QUESTION);
     return (
       <NotFoundEmptyState
         title="Questions not available"
@@ -92,8 +104,14 @@ const Quiz = () => {
   }
 
   return (
-    <section className="quiz-container container-padded">
-      <h1 className="quiz-header">{id ? QuizData[id].code : "GST"}</h1>
+    <section className="quiz-container container container-padded">
+      <div className="quiz-header">
+        <h1 className="page-header-2">{id ? QuizData[id].code : "GST"}</h1>
+        {quizQuestions.length && (
+          <p className="quiz-header__timer">{`${formattedMinutes} : ${formattedSeconds}`}</p>
+        )}
+      </div>
+
       <div className="question-container">
         <form className="question-form">
           <Question
@@ -128,11 +146,11 @@ const Quiz = () => {
                   setCurrentQuestion(num);
                 }}
                 active={currentQuestion === num}
-                // answered={
-                //   answeredQuestions
-                //     ? answeredQuestions[num]?.answer?.length > 0
-                //     : false
-                // }
+                answered={
+                  answeredQuestions && answeredQuestions[num]
+                    ? answeredQuestions[num]?.answer !== null
+                    : false
+                }
               />
             ))}
           </div>

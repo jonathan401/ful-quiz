@@ -24,7 +24,7 @@ function App() {
         <Navbar />
         <main>
           <QuizProvider>
-            <div className="container">
+            <div>
               <Routes>
                 {/* public routes */}
                 {publicRoutes.map((route) => (

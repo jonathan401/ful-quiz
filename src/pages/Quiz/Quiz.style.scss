@@ -1,3 +1,15 @@
+.quiz-container {
+  // background-image: url("../../assets/css-pattern-by-magicpattern-blue.png");
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  // background-position: center;
+
+  &__btn--redirect {
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+}
+
 .quiz-btn__container {
   display: flex;
   gap: 0.4rem;
@@ -5,13 +17,6 @@
   padding: 0.8rem 0;
   border-top: 1px solid var(--grayish-blue);
   flex-wrap: wrap;
-}
-
-.quiz-container {
-  &__btn--redirect {
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
 }
 
 .quiz-progress-btn-group {
@@ -39,5 +44,20 @@
       outline: 2px solid var(--soft-blue);
       outline-offset: 2px;
     }
+  }
+}
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__timer {
+    background-color: var(--white);
+    padding: 0.5em 0.7em;
+    border-radius: var(--rounded-sm);
+    color: var(--text-color);
+    font-size: var(--text-size);
+    outline: 1px solid var(--border-color);
   }
 }

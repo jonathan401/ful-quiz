@@ -10,7 +10,7 @@ export const createUserDocument = async (user: User) => {
   // grab the data that exists within that document
   const userSnapshot = await getDoc(userRef);
 
-  // if the dosen't exist, then create a new user document with the user's email and display name
+  // if it dosen't exist, then create a new user document with the user's email and display name
   if (!userSnapshot.exists()) {
     const { email, displayName } = user;
     try {

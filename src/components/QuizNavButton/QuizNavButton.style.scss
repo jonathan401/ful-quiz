@@ -6,7 +6,7 @@
   background-color: var(--white);
   border: 1px solid var(--border-color);
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 400;
   border-radius: var(--rounded-sm);
   transition: background-color 150ms ease, outline 150ms ease;
   color: var(--text-color-1);
@@ -20,7 +20,7 @@
 
   &--answered {
     background-color: var(--soft-blue);
-    outline-color: var(--soft-blue);
+    outline-color: transparent;
     color: var(--white);
     border-color: transparent;
   }

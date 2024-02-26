@@ -1,8 +1,10 @@
 .courses-list {
-  background-image: url("../../assets/css-pattern-by-magicpattern-blue.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  // background-image: url("../../assets/css-pattern-by-magicpattern-blue.png");
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;'
+  // background-color: red;
+  padding: 1rem 0;
 
   &__items {
     display: grid;

@@ -35,16 +35,14 @@ const QuizContext = createContext<QuizContextType>({
 });
 
 const QuizProvider = ({ children }: { children: ReactNode }) => {
-  const [answeredQuestions, setAnsweredQuestions] = useState<QuizAnswerType[]>(
-    () => {
-      const storedAnswersRef = sessionStorage.getItem(
-        STORAGE_CONSTANTS.ANSWERS
-      );
-      const storedAnswers =
-        storedAnswersRef !== null ? JSON.parse(storedAnswersRef) : [];
-      return storedAnswers;
-    }
-  );
+  const [answeredQuestions, setAnsweredQuestions] = useState<
+    QuizAnswerType[] | []
+  >(() => {
+    const storedAnswersRef = sessionStorage.getItem(STORAGE_CONSTANTS.ANSWERS);
+    const storedAnswers =
+      storedAnswersRef !== null ? JSON.parse(storedAnswersRef) : [];
+    return storedAnswers;
+  });
 
   const [questions, setQuestions] = useState<QuizQuestionType[] | []>(() => {
     const storedAnswersRef = sessionStorage.getItem(
@@ -72,28 +70,24 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
 
   const clearChoice = (questionId: number) => {
     setAnsweredQuestions((prevAnswers) => {
-      const rest = [
-        ...prevAnswers.filter((answer) => answer.questionNumber !== questionId),
-      ];
-      const choice = prevAnswers.filter(
-        (answer) => answer.questionNumber === questionId
-      )[0];
-      choice.answer = null;
-      return [...rest, choice];
+      const newAnswers = [...prevAnswers];
+      if (newAnswers[questionId] !== undefined) {
+        newAnswers[questionId] = {
+          questionNumber: null,
+          question: null,
+          correct: null,
+          answer: null,
+        };
+      }
+      return newAnswers;
     });
   };
 
   const addAnsweredQuestion = (questionId: number, answer: QuizAnswerType) => {
     setAnsweredQuestions((prevAnswers) => {
-      // if the question has been answered, update the answer else add the new answer
       if (questionId >= 0 && questionId < prevAnswers.length) {
         return prevAnswers.map((obj, i) => (i === questionId ? answer : obj));
       } else {
-        //  THIS IS REALLY HACKY
-        /* 
-          when the user answers a question, save that question and if it is edited, find that question and update
-          its value. If the question is being answered for the first time, add that answer to the question
-        */
         let newAnswers = [...prevAnswers];
         for (let i = 0; i <= questionId; i++) {
           if (!newAnswers[i]) {
@@ -108,7 +102,6 @@ const QuizProvider = ({ children }: { children: ReactNode }) => {
                   };
           }
         }
-
         return newAnswers;
       }
     });

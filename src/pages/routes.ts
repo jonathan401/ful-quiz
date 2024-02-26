@@ -4,6 +4,7 @@ import { Courses } from "./Courses";
 import { Landing } from "./Landing";
 import { Quiz } from "./Quiz";
 import { ReviewPage } from "./Review";
+import { Profile } from "./Profile";
 import SignUpForm from "./Authentication/SignUpForm";
 import LoginForm from "./Authentication/LoginForm";
 import PasswordRecovery from "./PasswordRecovery/PasswordRecovery";
@@ -58,5 +59,10 @@ export const protectedRoutes: Routes[] = [
     key: "review",
     path: "/review",
     component: ReviewPage,
+  },
+  {
+    key: "profile",
+    path: "/profile",
+    component: Profile,
   },
 ];

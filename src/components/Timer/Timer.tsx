@@ -1,20 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const Timer = React.memo(({ initialSeconds }: { initialSeconds: number }) => {
-  const [seconds, setSeconds] = useState(initialSeconds);
-
-  useEffect(() => {
-    if (seconds <= 0) {
-      return;
-    }
-
-    const timer = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [seconds]);
-
   const formatTime = (timeInSeconds: number) => {
     const minutes = Math.floor(timeInSeconds / 60)
       .toString()
@@ -24,7 +10,7 @@ const Timer = React.memo(({ initialSeconds }: { initialSeconds: number }) => {
     return `${minutes}:${seconds}`;
   };
 
-  return <p>Time left: {formatTime(seconds)}</p>;
+  return <p>Time left: {formatTime(initialSeconds)}</p>;
 });
 
 export default Timer;

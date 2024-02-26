@@ -3,9 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Input } from "../../components/Input";
 import { userAuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
-import { firebaseAuthErrorMap } from "../../helpers";
 import Button from "../../components/Button/Button";
-import { Link } from "react-router-dom";
 
 interface PasswordRecoveryInput {
   email: string;

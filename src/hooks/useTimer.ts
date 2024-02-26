@@ -1,14 +1,21 @@
-import { useState, useEffect, useMemo, Dispatch, SetStateAction } from "react";
+import { useState, useEffect } from "react";
+import { STORAGE_CONSTANTS } from "../constants";
 
 export const useTimer = (
-  initialTimeInSeconds: number
+  initialTime: number
 ): {
-  formatedMunites: string;
-  formatedSeconds: string;
+  formattedMinutes: string;
+  formattedSeconds: string;
   secondsLeft: number;
-  updateTimer: Dispatch<SetStateAction<boolean>>;
+  stopTimer: () => void;
 } => {
-  const [seconds, setSeconds] = useState<number>(initialTimeInSeconds);
+  // const [seconds, setSeconds] = useState<number>(initialTime);
+  const [seconds, setSeconds] = useState<number>(() => {
+    const storedTimeRef = sessionStorage.getItem(STORAGE_CONSTANTS.TIME);
+    const storedTime =
+      storedTimeRef !== null ? JSON.parse(storedTimeRef) : initialTime;
+    return storedTime;
+  });
   const [clearTimer, setClearTimer] = useState(false);
 
   useEffect(() => {
@@ -32,6 +39,14 @@ export const useTimer = (
    automatically using the  setinterval function? */
   }, [seconds, clearTimer]);
 
+  useEffect(() => {
+    sessionStorage.setItem(STORAGE_CONSTANTS.TIME, String(seconds));
+  }, [seconds]);
+
+  const stopTimer = () => {
+    setClearTimer(true);
+  };
+
   // return the minutes and the seconds in the format '05' : '00'
   const timeInMinutes = Math.floor(seconds / 60)
     .toString()
@@ -39,20 +54,9 @@ export const useTimer = (
   const timeInSeconds = (seconds % 60).toString().padStart(2, "0");
 
   return {
-    formatedMunites: timeInMinutes,
-    formatedSeconds: timeInSeconds,
+    formattedMinutes: timeInMinutes,
+    formattedSeconds: timeInSeconds,
     secondsLeft: seconds,
-    updateTimer: setClearTimer,
+    stopTimer,
   };
-
-  // const result = useMemo(() => {
-  //   return {
-  //     formatedMunites: timeInMinutes,
-  //     formatedSeconds: timeInSeconds,
-  //     secondsLeft: seconds,
-  //     updateTimer: setClearTimer,
-  //   };
-  // }, []);
-
-  // return result;
 };

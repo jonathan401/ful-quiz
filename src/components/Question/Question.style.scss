@@ -12,6 +12,7 @@
   }
 
   &__text {
+    color: var(--text-color);
     margin: 0.5rem 0;
     font-size: var(--text-size-larger);
   }
@@ -39,7 +40,8 @@
     }
 
     &:checked + label {
-      background-color: var(--soft-blue);
+      background-color: hsl(230, 95%, 85%);
+      outline: 1px solid var(--soft-blue);
       color: var(--white);
       border-color: transparent;
       transition: background-color 200ms ease;
@@ -59,7 +61,7 @@
     border: 1px solid var(--border-color);
     display: flex;
     flex-grow: 1;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--text-color-1);
     font-size: var(--text-size);
 

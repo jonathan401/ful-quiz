@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuizContext } from "../../context/QuizContext";
 import { QuizQuestionType } from "../../types/quiz";
 
-import { addLeadingZero, alphabetMap } from "../../utils";
+import { alphabetMap } from "../../utils";
 
 // styles
 import "./Question.style.scss";
@@ -78,6 +78,7 @@ const Question = ({
             );
           })}
           {answeredQuestions.length > 0 &&
+            answeredQuestions[questionNumber] &&
             answeredQuestions[questionNumber]?.answer && (
               <button
                 type="button"

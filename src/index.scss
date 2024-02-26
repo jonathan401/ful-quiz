@@ -42,12 +42,16 @@
   /* container */
   --container-width: 70em;
   --container-width-sm: 40em;
+  --container-width-md: 50em;
 
   /* font */
   --text-size: clamp(0.9rem, 4vw, 0.95rem);
   --text-size-larger: clamp(0.95rem, 4vw, 1.1rem);
+  --header-size: clamp(1.2rem, 4vw, 1.5rem);
 
   --box-shadow: 0px 3.5px 5.5px 0px #00000005;
+  --shadow-lg: 0 10px 25px -15px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 1px 1px 0 rgba(0, 0, 0, 0.07);
 
   // react toastify
   --toastify-toast-width: fit-content;
@@ -215,18 +219,6 @@ p {
     animation: rotate 700ms linear infinite;
   }
 
-  &-primary-hover:hover {
-    background-color: transparent;
-    outline: 3px solid var(--soft-blue);
-    color: var(--soft-blue);
-  }
-
-  &-secondary-hover:hover {
-    background-color: transparent;
-    outline: 2px solid var(--soft-red);
-    color: var(--soft-red);
-  }
-
   &--primary,
   &--secondary,
   &--outlined,
@@ -289,6 +281,34 @@ p {
   &--full-width {
     width: 100%;
   }
+
+  &--danger,
+  &--neutral {
+    font-weight: 500;
+    padding: 0.6rem 0.8rem;
+    min-width: 5.5rem;
+    border-radius: var(--rounded-sm);
+  }
+
+  &--danger {
+    background-color: var(--soft-red);
+    color: var(--white);
+  }
+
+  &--neutral {
+    background-color: var(--bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+
+    &:hover {
+      background-color: var(--color-base-400);
+      // opacity: 0.8;
+    }
+
+    &:focus {
+      outline: 1px solid var(--grayish-blue);
+    }
+  }
 }
 
 // form and inputs
@@ -299,7 +319,7 @@ form {
 }
 
 label {
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
 }
 
@@ -319,6 +339,7 @@ input {
 
 .container,
 .container-sm,
+.container-md,
 .container-flexed {
   height: 100%;
   margin: 0 auto;
@@ -329,14 +350,22 @@ input {
   max-width: 30rem;
 }
 
+.container,
+.container-sm,
+.container-md {
+  width: 100%;
+}
+
 .container {
   max-width: var(--container-width);
-  width: 100%;
 }
 
 .container-sm {
   max-width: var(--container-width-sm);
-  width: 100%;
+}
+
+.container-md {
+  max-width: var(--container-width-md);
 }
 
 .container-padded {
@@ -388,7 +417,7 @@ input {
 }
 
 .auth-link {
-  color: var(--text-color-1);
+  color: var(--text-color);
   font-weight: 400;
   font-size: var(--text-size);
   transition: color 100ms linear;
@@ -403,4 +432,11 @@ input {
   display: flex;
   margin: 0 auto;
   gap: 0.3rem;
+}
+
+.top-cover {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+  min-height: 20vh;
+  background-color: var(--white);
 }

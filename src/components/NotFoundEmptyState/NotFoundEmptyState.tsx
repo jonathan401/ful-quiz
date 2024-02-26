@@ -21,7 +21,7 @@ const NotFound: React.FC<NotFoundProps> = ({
   type,
 }) => {
   return (
-    <div className="redirect">
+    <div className="redirect container-padded">
       <img
         src={type === "empty" ? EmptyImage : NotFoundImage}
         alt="not found"

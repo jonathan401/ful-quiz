@@ -17,7 +17,7 @@ const Landing = () => {
     }
   }, []);
   return (
-    <div className="wrap">
+    <div className="wrap container">
       <section className="hero">
         <div className="hero__illustration-container">
           <img src={HeroIllustration} alt="" className="hero__illustration" />

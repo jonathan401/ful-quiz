@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import { auth, db } from "../firebase-config";
 import { createUserDocument } from "../firebase-config/firebase-helpers";
 import { firebaseAuthErrorMap } from "../helpers";
+import { STORAGE_CONSTANTS } from "../constants";
 
 interface AuthContextType {
   currentUser: User | null;
@@ -40,7 +41,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(() => {
-    const storedUserRef = localStorage.getItem("user");
+    const storedUserRef = localStorage.getItem(STORAGE_CONSTANTS.USER);
     const storedUser =
       storedUserRef !== null ? JSON.parse(storedUserRef) : null;
     return storedUser;
@@ -53,7 +54,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // update local storage when user changes
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser));
+    localStorage.setItem(STORAGE_CONSTANTS.USER, JSON.stringify(currentUser));
   }, [currentUser]);
 
   const updateDisplayName = (name: string) => {
