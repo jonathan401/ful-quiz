@@ -1,22 +1,6 @@
 .user-menu {
   position: relative;
 
-  &__toggle-btn {
-    width: 2.5rem;
-    height: 2.5rem;
-    border: none;
-    display: grid;
-    place-content: center;
-    font-weight: 500;
-    color: var(--text-color);
-    border-radius: 50%;
-
-    &:focus-visible {
-      outline: 2px solid var(--text-color);
-      outline-offset: 2px;
-    }
-  }
-
   &-items {
     display: flex;
     flex-direction: column;
@@ -25,7 +9,7 @@
     top: calc(100% + 1rem);
     right: 0;
     background-color: var(--white);
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: var(--rounded);
     box-shadow: var(--box-shadow);
     min-width: 8rem;
@@ -58,13 +42,21 @@
   &__link {
     color: var(--text-color);
     text-decoration: none;
+
+    &--disabled {
+      font-size: 0.9rem;
+    }
+
+    &--disabled:hover {
+      color: var(--text-color);
+      opacity: 1;
+    }
   }
 
   &-btn {
     color: var(--text-color-1);
     width: 100%;
     border: none;
-    // padding: 0;
     background-color: transparent;
   }
 }

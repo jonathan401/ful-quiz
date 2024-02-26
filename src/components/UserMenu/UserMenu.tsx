@@ -5,6 +5,8 @@ import { MdOutlineSettings, MdOutlineLogout } from "react-icons/md";
 import { userAuthContext } from "../../context/AuthContext";
 
 import "./UserMenu.style.scss";
+import Avatar from "../Avatar/Avatar";
+import Divider from "../Divider/Divider";
 
 interface UserMenuProps {
   photoUrl?: string;
@@ -18,12 +20,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ photoUrl }) => {
     setIsOpen(false);
   };
 
-  const handleClose = (e: React.KeyboardEvent) => {
-    if (e.key === "Escape") {
-      console.log("hi");
-    }
-  };
-
   useEffect(() => {
     window.addEventListener("click", closeMenu);
 
@@ -32,43 +28,26 @@ const UserMenu: React.FC<UserMenuProps> = ({ photoUrl }) => {
 
   return (
     <div className="user-menu">
-      {/* display the options here */}
-      <button
+      <Avatar
         aria-haspopup="menu"
         aria-expanded="false"
         aria-label="user menu"
         aria-controls="user-menu"
-        className="user-menu__toggle-btn"
-        onClick={(e) => {
+        handleClick={(e) => {
           e.stopPropagation();
           setIsOpen((isOpen) => !isOpen);
         }}
-      >
-        {photoUrl ? (
-          <img
-            src={photoUrl}
-            aria-hidden="true"
-            alt=""
-            className="user-menu__avatar"
-          />
-        ) : (
-          <span className="user-menu__name-bubble">
-            {currentUser &&
-              currentUser.displayName &&
-              currentUser.displayName[0]}
-          </span>
-        )}
-      </button>
+      />
       {isOpen && (
         <ul id="user-menu" className="user-menu-items" role="menu">
-          <li className="user-menu__link-item" role="menuitem">
-            <Link to="user/settings" className="user-menu__link">
-              <AiOutlineUser aria-hidden="true" /> Profile
-            </Link>
+          <li className="user-menu__link user-menu__link--disabled">
+            <Avatar />
+            {currentUser?.email}
           </li>
+          <Divider />
           <li className="user-menu__link-item" role="menuitem">
-            <Link to="user/settings" className="user-menu__link">
-              <MdOutlineSettings aria-hidden="true" /> Settings
+            <Link to="/profile" className="user-menu__link">
+              <AiOutlineUser aria-hidden="true" /> Profile
             </Link>
           </li>
           <li className="user-menu__link-item" role="menuitem">
