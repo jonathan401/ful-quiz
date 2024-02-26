@@ -1,0 +1,34 @@
+.profile-info-container {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+
+  button {
+    justify-self: end;
+  }
+}
+
+.profile-page-header {
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.profile-info {
+  background-color: white;
+  padding: 1rem;
+  // outline: 1px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: var(--rounded);
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  gap: 1rem;
+
+  &__header {
+    font-weight: 500;
+    font-size: var(--text-size-larger);
+  }
+
+  &__text {
+    max-width: 90%;
+  }
+}
