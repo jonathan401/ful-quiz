@@ -36,7 +36,7 @@ const Quiz = () => {
 
   const { id } = useParams<{ id: string }>();
   const { formattedMinutes, formattedSeconds, secondsLeft, stopTimer } =
-    useTimer(5);
+    useTimer(600);
 
   if (secondsLeft <= 0) {
     console.log("time up");
